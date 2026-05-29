@@ -633,7 +633,7 @@
 
           <a href="./daftar.html"
              class="btn btn--primary btn--lg" style="margin-top:22px;width:100%;justify-content:center;">
-            ♟ Daftar via Google Form
+            ♟ Daftar Sekarang — Borang Rasmi
           </a>
         </div>
 
@@ -863,7 +863,7 @@
         })
           .then(r => r.ok ? r.json() : Promise.reject())
           .then(() => {
-            showStatus('success', `✓ Terima kasih, ${name}! Kami akan menghubungi anda dalam masa 24 jam. Untuk pendaftaran rasmi, sila gunakan borang Google Form kami.`);
+            showStatus('success', `✓ Terima kasih, ${name}! Kami akan menghubungi anda dalam masa 24 jam.`);
             form.reset();
           })
           .catch(() => showStatus('error', 'Ralat berlaku. Sila hubungi kami terus di 019-572 7276.'))
