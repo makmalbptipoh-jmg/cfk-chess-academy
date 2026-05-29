@@ -5,9 +5,23 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
   <title>Kedai Catur Digital — CFK Academy</title>
   <meta name="description" content="Video, E-Book, Perisian, Database & Majalah Catur. Diskaun sehingga 73%. Penghantaran Google Drive dalam 24 jam."/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:locale" content="ms_MY"/>
+  <meta property="og:site_name" content="CFK Academy"/>
+  <meta property="og:title" content="Kedai Catur Digital — CFK Academy"/>
+  <meta property="og:description" content="Video, e-book, perisian, database dan majalah catur dengan penghantaran Google Drive dalam 24 jam."/>
+  <meta property="og:url" content="https://cfk-delta.vercel.app/shop"/>
+  <meta property="og:image" content="https://cfk-delta.vercel.app/social-preview.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Kedai Catur Digital — CFK Academy"/>
+  <meta name="twitter:description" content="Video, e-book, perisian, database dan majalah catur dengan penghantaran Google Drive dalam 24 jam."/>
+  <meta name="twitter:image" content="https://cfk-delta.vercel.app/social-preview.png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Open+Sans:wght@400;500;600&display=swap"/>
+  <script src="./analytics.js" defer></script>
   <style>
   :root{
     --amber:#F59E0B;--amber-dark:#D97706;--amber-light:#FDE68A;
@@ -74,6 +88,16 @@
   @media(max-width:1100px){.product-grid{grid-template-columns:repeat(3,1fr);}}
   @media(max-width:780px){.product-grid{grid-template-columns:repeat(2,1fr);}}
   @media(max-width:480px){.product-grid{grid-template-columns:1fr;}}
+
+  /* ── Loading skeleton ── */
+  .skeleton-card{background:#fff;border:1px solid #E5E7EB;border-radius:var(--radius-md);box-shadow:var(--shadow-sm);overflow:hidden;}
+  .skeleton-card__media{height:160px;background:linear-gradient(90deg,#E5E7EB 25%,#F3F4F6 50%,#E5E7EB 75%);background-size:200% 100%;animation:skeleton-shimmer 1.3s infinite;}
+  .skeleton-card__body{padding:14px 16px 16px;}
+  .skeleton-line{height:12px;border-radius:999px;background:linear-gradient(90deg,#E5E7EB 25%,#F3F4F6 50%,#E5E7EB 75%);background-size:200% 100%;animation:skeleton-shimmer 1.3s infinite;margin-bottom:10px;}
+  .skeleton-line--title{height:16px;width:90%;}
+  .skeleton-line--short{width:58%;}
+  .skeleton-line--price{height:22px;width:44%;margin-top:14px;margin-bottom:0;}
+  @keyframes skeleton-shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
 
   /* ── Product card ── */
   .p-card{background:#fff;border-radius:var(--radius-md);box-shadow:var(--shadow-sm);border:1px solid #E5E7EB;overflow:hidden;display:flex;flex-direction:column;transition:var(--tr);}
@@ -210,6 +234,11 @@
   .cart-fab-badge{background:var(--navy-dark);color:#fff;font-size:.72rem;border-radius:100px;padding:2px 7px;min-width:22px;text-align:center;}
   .cart-fab.hidden{opacity:0;pointer-events:none;transform:translateY(20px);}
 
+  /* ── Floating WhatsApp ── */
+  .whatsapp-float{position:fixed;bottom:24px;left:20px;z-index:850;width:56px;height:56px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(37,211,102,.45);transition:transform .2s ease,box-shadow .2s ease;}
+  .whatsapp-float:hover,.whatsapp-float:focus-visible{transform:scale(1.08);box-shadow:0 6px 24px rgba(37,211,102,.6);}
+  .whatsapp-float svg{width:30px;height:30px;fill:#fff;}
+
   /* ── Footer ── */
   .shop-footer{background:var(--navy-dark);color:rgba(255,255,255,.6);text-align:center;padding:28px 16px;font-size:.85rem;}
   .shop-footer a{color:var(--amber);font-weight:600;}
@@ -249,6 +278,7 @@
 
     /* FAB position above admin bar */
     .cart-fab{bottom:72px;right:16px;}
+    .whatsapp-float{bottom:calc(18px + env(safe-area-inset-bottom,0));left:16px;width:52px;height:52px;}
 
     /* Admin bar text smaller */
     .admin-bar{font-size:.75rem;}
@@ -348,8 +378,11 @@
 </div>
 
 <!-- ── Product grid ── -->
-<div class="product-grid" id="productGrid">
-  <div class="empty-state"><p>⏳</p><p>Memuatkan produk…</p></div>
+<div class="product-grid" id="productGrid" aria-live="polite" aria-busy="true">
+  <div class="skeleton-card" aria-hidden="true"><div class="skeleton-card__media"></div><div class="skeleton-card__body"><div class="skeleton-line skeleton-line--title"></div><div class="skeleton-line"></div><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--price"></div></div></div>
+  <div class="skeleton-card" aria-hidden="true"><div class="skeleton-card__media"></div><div class="skeleton-card__body"><div class="skeleton-line skeleton-line--title"></div><div class="skeleton-line"></div><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--price"></div></div></div>
+  <div class="skeleton-card" aria-hidden="true"><div class="skeleton-card__media"></div><div class="skeleton-card__body"><div class="skeleton-line skeleton-line--title"></div><div class="skeleton-line"></div><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--price"></div></div></div>
+  <div class="skeleton-card" aria-hidden="true"><div class="skeleton-card__media"></div><div class="skeleton-card__body"><div class="skeleton-line skeleton-line--title"></div><div class="skeleton-line"></div><div class="skeleton-line skeleton-line--short"></div><div class="skeleton-line skeleton-line--price"></div></div></div>
 </div>
 
 <!-- ── Cart sidebar ── -->
@@ -507,10 +540,38 @@ function cartTotal(){
   return { total };
 }
 function totalItems(){ return cart.reduce((s,c)=>s+c.qty,0); }
+function gaItem(p){
+  return {
+    item_id: String(p.id),
+    item_name: p.title,
+    item_category: CAT_LABEL[p.category] || p.category,
+    price: p.price,
+    quantity: p.qty || 1
+  };
+}
+function trackShopEvent(name, params = {}){
+  if (typeof window.cfkTrack === 'function') window.cfkTrack(name, params);
+}
+function renderProductSkeletons(count = 8){
+  const grid = document.getElementById('productGrid');
+  if(!grid) return;
+  grid.setAttribute('aria-busy', 'true');
+  grid.innerHTML = Array.from({length: count}, () => `
+    <div class="skeleton-card" aria-hidden="true">
+      <div class="skeleton-card__media"></div>
+      <div class="skeleton-card__body">
+        <div class="skeleton-line skeleton-line--title"></div>
+        <div class="skeleton-line"></div>
+        <div class="skeleton-line skeleton-line--short"></div>
+        <div class="skeleton-line skeleton-line--price"></div>
+      </div>
+    </div>`).join('');
+}
 
 // ── Render products ───────────────────────────────────────────────────────────
 function renderProducts(){
   const grid = document.getElementById('productGrid');
+  grid.setAttribute('aria-busy', 'false');
   document.getElementById('productCount').textContent = filtered.length;
   if(!filtered.length){
     grid.innerHTML = '<div class="empty-state"><p>🔍</p><p>Tiada produk dijumpai.</p></div>';
@@ -568,12 +629,22 @@ function renderProducts(){
         updateCartUI();
         btn.className='add-btn add-btn--in';
         btn.textContent='✓ Dalam Troli';
+        trackShopEvent('add_to_cart', {
+          currency: 'MYR',
+          value: prod.price,
+          items: [gaItem(prod)]
+        });
       }
     });
   });
 
   // Trigger lazy image loading for newly rendered cards
   loadProductImages();
+  trackShopEvent('view_item_list', {
+    item_list_id: activeCat,
+    item_list_name: activeCat === 'all' ? 'Semua Produk' : (CAT_LABEL[activeCat] || activeCat),
+    items: filtered.slice(0, 10).map(gaItem)
+  });
 }
 
 // ── Batch image loading (1 request per page, not 1 per card) ─────────────────
@@ -678,6 +749,13 @@ function updateCartUI(){
 
 // ── Open / close cart ─────────────────────────────────────────────────────────
 function openCart(){
+  if(cart.length){
+    trackShopEvent('view_cart', {
+      currency: 'MYR',
+      value: cartTotal().total,
+      items: cart.map(gaItem)
+    });
+  }
   document.getElementById('cartSidebar').classList.add('open');
   document.getElementById('cartOverlay').classList.add('open');
   document.body.style.overflow='hidden';
@@ -691,6 +769,11 @@ function closeCart(){
 // ── Open / close modal ────────────────────────────────────────────────────────
 function openModal(){
   const {total} = cartTotal();
+  trackShopEvent('begin_checkout', {
+    currency: 'MYR',
+    value: total,
+    items: cart.map(gaItem)
+  });
   document.getElementById('modalOrderItems').innerHTML = cart.map(c=>
     `<div class="order-item"><span class="order-item__title">${esc(c.title)}</span><span>RM ${c.price.toFixed(2)}</span></div>`
   ).join('');
@@ -748,6 +831,12 @@ document.getElementById('confirmOrderBtn').addEventListener('click',async()=>{
     });
     const data = await res.json();
     if(data.success){
+      trackShopEvent('generate_lead', {
+        currency: 'MYR',
+        value: total,
+        transaction_id: data.orderId,
+        items: cart.map(gaItem)
+      });
       document.getElementById('orderFormSection').style.display='none';
       document.getElementById('orderSuccess').style.display='block';
       document.getElementById('successOrderId').textContent=`ID Pesanan: ${data.orderId}`;
@@ -839,7 +928,7 @@ function loadProducts() {
     + (activeCat !== 'all' ? `&category=${activeCat}` : '')
     + (searchQ ? `&search=${encodeURIComponent(searchQ)}` : '');
 
-  document.getElementById('productGrid').innerHTML = '<div class="empty-state"><p>⏳</p><p>Memuatkan…</p></div>';
+  renderProductSkeletons();
 
   fetch(url)
     .then(r=>r.ok?r.json():Promise.reject())
@@ -851,7 +940,7 @@ function loadProducts() {
       renderPagination(totalProducts, currentPage);
       updateCartUI();
     })
-    .catch(()=>{ document.getElementById('productGrid').innerHTML='<div class="empty-state"><p>⚠️</p><p>Tidak dapat memuatkan produk. Pastikan server berjalan.</p></div>'; });
+    .catch(()=>{ const grid = document.getElementById('productGrid'); grid.setAttribute('aria-busy', 'false'); grid.innerHTML='<div class="empty-state"><p>⚠️</p><p>Tidak dapat memuatkan produk. Pastikan server berjalan.</p></div>'; });
 }
 
 // Update cat-tab labels with real counts
@@ -875,13 +964,22 @@ document.getElementById('catTabs').addEventListener('click', e=>{
   btn.classList.add('active');
   activeCat=btn.dataset.cat;
   currentPage=1;
+  trackShopEvent('select_content', {
+    content_type: 'product_category',
+    item_id: activeCat
+  });
   loadProducts();
 }, true);  // use capture to override earlier listener
 
 let searchTimer;
 document.getElementById('searchInput').addEventListener('input', e=>{
   clearTimeout(searchTimer);
-  searchTimer = setTimeout(()=>{ searchQ=e.target.value.trim(); currentPage=1; loadProducts(); }, 350);
+  searchTimer = setTimeout(()=>{
+    searchQ=e.target.value.trim();
+    currentPage=1;
+    if(searchQ) trackShopEvent('search', { search_term: searchQ });
+    loadProducts();
+  }, 350);
 }, true);
 
 loadProducts();
@@ -1020,5 +1118,13 @@ async function adminSaveImage(title, url) {
 }());
 
 </script>
+
+<!-- ── WhatsApp Floating Button ── -->
+<a class="whatsapp-float" href="https://wa.me/60195727276?text=Salam%2C%20saya%20ingin%20bertanya%20tentang%20produk%20di%20CFK%20Kedai%20Digital."
+   target="_blank" rel="noopener" aria-label="WhatsApp CFK Academy">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
 </body>
 </html>
