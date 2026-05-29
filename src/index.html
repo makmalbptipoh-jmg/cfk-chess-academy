@@ -202,7 +202,16 @@
       </div>
 
       <div class="hero__visual" aria-hidden="true">
-        <div class="chess-board-deco" id="heroBoardDeco" role="img" aria-label="Decorative chess board"></div>
+        <div class="chess-cube-scene">
+          <div class="chess-cube">
+            <div class="chess-cube__face chess-cube__face--front"></div>
+            <div class="chess-cube__face chess-cube__face--back"></div>
+            <div class="chess-cube__face chess-cube__face--right"></div>
+            <div class="chess-cube__face chess-cube__face--left"></div>
+            <div class="chess-cube__face chess-cube__face--top"></div>
+            <div class="chess-cube__face chess-cube__face--bottom"></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -715,29 +724,7 @@
   (function () {
     'use strict';
 
-    /* 1. Chess board decoration */
-    const PIECES = {
-      0: ['♜','♞','♝','♛','♚','♝','♞','♜'],
-      1: ['♟','♟','♟','♟','♟','♟','♟','♟'],
-      6: ['♙','♙','♙','♙','♙','♙','♙','♙'],
-      7: ['♖','♘','♗','♕','♔','♗','♘','♖']
-    };
-    (function buildBoard() {
-      const board = document.getElementById('heroBoardDeco');
-      if (!board) return;
-      const frag = document.createDocumentFragment();
-      for (let r = 0; r < 8; r++) {
-        for (let c = 0; c < 8; c++) {
-          const cell = document.createElement('div');
-          cell.className = 'chess-board-deco__cell chess-board-deco__cell--' + ((r+c)%2===0?'light':'dark');
-          if (PIECES[r]) cell.textContent = PIECES[r][c] || '';
-          frag.appendChild(cell);
-        }
-      }
-      board.appendChild(frag);
-    })();
-
-    /* 2. Scroll fade-in */
+    /* 1. Scroll fade-in */
     if (window.IntersectionObserver) {
       const obs = new IntersectionObserver(entries => {
         entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
