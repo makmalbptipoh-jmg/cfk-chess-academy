@@ -23,6 +23,11 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname));
 
+// Explicit static routes (Vercel serverless fallback)
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
+app.get('/index.html', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
+app.get('/styles.css', (req, res) => res.sendFile(path.join(__dirname, 'styles.css')));
+
 // ── Academy endpoints ─────────────────────────────────────────────────────────
 
 app.get('/api/features', (req, res) => {
