@@ -1,0 +1,4 @@
+frontend complete
+Files created:
+- src/index.html
+- src/styles.css

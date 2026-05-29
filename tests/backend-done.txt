@@ -1,0 +1,9 @@
+backend complete
+Endpoints:
+- GET /api/features
+- GET /api/pricing
+- POST /api/contact
+Files created:
+- src/server.js
+- README.md
+- package.json

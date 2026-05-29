@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Chess For Kids (CFK) — Pendaftaran Terbuka 2026! Kelas catur untuk kanak-kanak di Perak. Cuba percuma 1 bulan. 5 cawangan: Klebang, Buntong, Tambun, Sri Iskandar, Sungai Siput." />
+  <title>Chess For Kids (CFK) — Pendaftaran Terbuka 2026</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <style>
+    /* ---- Pain-point cards (reuse feature-card on cream bg) ---- */
+    .pain-section { background: var(--cream); }
+    .pain-section .section-title { color: var(--navy); }
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 40px;
+    }
+    .pain-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 28px 22px;
+      box-shadow: var(--shadow-sm);
+      border-left: 4px solid var(--amber);
+      text-align: center;
+    }
+    .pain-card__num {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 2rem;
+      color: var(--amber);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .pain-card__text { font-size: 0.93rem; color: var(--text-muted); font-style: italic; }
+    .pain-cta {
+      margin-top: 40px;
+      background: var(--navy);
+      color: var(--white);
+      border-radius: var(--radius-md);
+      padding: 24px 32px;
+      text-align: center;
+    }
+    .pain-cta p { color: rgba(255,255,255,0.85); margin-top: 8px; font-size: 0.98rem; }
+
+    /* ---- Location cards ---- */
+    .branches-section { background: var(--navy); }
+    .branches-section .section-label { background: rgba(245,158,11,0.18); }
+    .branches-section .section-title { color: var(--white); }
+    .branches-section .section-subtitle { color: rgba(255,255,255,0.70); }
+    .branches-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .branch-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(245,158,11,0.25);
+      border-radius: var(--radius-md);
+      padding: 28px 24px;
+      transition: var(--transition);
+    }
+    .branch-card:hover { background: rgba(255,255,255,0.12); border-color: var(--amber); transform: translateY(-4px); }
+    .branch-card__name {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 1.08rem;
+      color: var(--amber);
+      margin-bottom: 8px;
+    }
+    .branch-card__address { font-size: 0.85rem; color: rgba(255,255,255,0.65); line-height: 1.55; margin-bottom: 14px; }
+    .branch-card__schedule { margin-bottom: 14px; }
+    .branch-card__schedule-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.80);
+      margin-bottom: 5px;
+    }
+    .branch-card__schedule-icon { color: var(--amber); flex-shrink: 0; }
+    .branch-card__map {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--amber);
+      border: 1px solid rgba(245,158,11,0.40);
+      border-radius: 6px;
+      padding: 5px 12px;
+      transition: var(--transition);
+    }
+    .branch-card__map:hover { background: rgba(245,158,11,0.15); }
+
+    /* ---- Payment info box ---- */
+    .payment-box {
+      background: var(--cream);
+      border: 2px solid var(--amber);
+      border-radius: var(--radius-md);
+      padding: 22px 26px;
+      margin-top: 20px;
+    }
+    .payment-box__title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+    .payment-box__row { display: flex; gap: 10px; font-size: 0.9rem; color: var(--text-main); margin-bottom: 6px; }
+    .payment-box__label { font-weight: 600; min-width: 130px; color: var(--text-muted); }
+
+    /* ---- Responsive overrides ---- */
+    @media (max-width: 960px) {
+      .pain-grid { grid-template-columns: repeat(2, 1fr); }
+      .branches-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .pain-grid { grid-template-columns: 1fr; }
+      .branches-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="navbar__inner">
+      <a href="#" class="navbar__brand" aria-label="Chess For Kids home">
+        <span class="navbar__brand-icon" aria-hidden="true">♟</span>
+        Chess For <span>Kids</span>
+      </a>
+      <ul class="navbar__links" role="list">
+        <li><a href="#why">Kenapa CFK?</a></li>
+        <li><a href="#features">Kelebihan</a></li>
+        <li><a href="#pricing">Yuran</a></li>
+        <li><a href="#branches">Cawangan</a></li>
+        <li><a href="#enroll">Daftar</a></li>
+        <li><a href="/shop" style="color:var(--amber);">🛒 Kedai</a></li>
+      </ul>
+      <a href="https://forms.gle/cySXhSezJeB1M3JH9" target="_blank" rel="noopener" class="btn btn--primary" style="padding:10px 22px;font-size:0.92rem;">
+        Daftar Sekarang ♚
+      </a>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" aria-label="Hero">
+    <div class="hero__inner">
+      <div class="hero__content">
+        <div class="hero__badge" aria-hidden="true">
+          ‼️ Pendaftaran Terbuka 2026 — Cuba Percuma 1 Bulan!
+        </div>
+        <h1 class="hero__title">
+          Chess For
+          <span class="accent">Kids (CFK)</span>
+        </h1>
+        <p class="hero__tagline">
+          Ubah masa skrin jadi masa berfikir. Program catur berstruktur untuk kanak-kanak
+          yang membantu fokus, kreativiti, dan keyakinan diri — dalam suasana yang seronok!
+        </p>
+        <div class="hero__actions">
+          <a href="https://forms.gle/cySXhSezJeB1M3JH9" target="_blank" rel="noopener" class="btn btn--primary btn--lg">
+            ♟ Daftar Sekarang — Cuba Percuma
+          </a>
+          <a href="#branches" class="btn btn--outline btn--lg">
+            Lihat Jadual &amp; Cawangan
+          </a>
+        </div>
+        <div class="hero__stats" aria-label="Academy achievements">
+          <div class="hero__stat">
+            <div class="hero__stat-num">5</div>
+            <div class="hero__stat-label">Cawangan di Perak</div>
+          </div>
+          <div class="hero__stat">
+            <div class="hero__stat-num">17thn</div>
+            <div class="hero__stat-label">Pengalaman Mengajar</div>
+          </div>
+          <div class="hero__stat">
+            <div class="hero__stat-num">≤10</div>
+            <div class="hero__stat-label">Pelajar / Kelas</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__visual" aria-hidden="true">
+        <div class="chess-board-deco" id="heroBoardDeco" role="img" aria-label="Decorative chess board"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PAIN POINTS ===== -->
+  <section class="section pain-section" id="why">
+    <div class="container">
+      <div class="text-center">
+        <span class="section-label">Adakah anak anda…</span>
+        <h2 class="section-title">Menunjukkan Tanda-tanda Ini?</h2>
+        <p class="section-subtitle">Sekiranya ya, bawa mereka ke Chess For Kids — penyelesaian terbukti untuk ibu bapa yang prihatin.</p>
+      </div>
+      <div class="pain-grid">
+        <div class="pain-card fade-in">
+          <div class="pain-card__num">1</div>
+          <p class="pain-card__text">Ketagih telefon pintar atau permainan video?</p>
+        </div>
+        <div class="pain-card fade-in">
+          <div class="pain-card__num">2</div>
+          <p class="pain-card__text">Kurang aktif dan tidak bersemangat seperti dahulu?</p>
+        </div>
+        <div class="pain-card fade-in">
+          <div class="pain-card__num">3</div>
+          <p class="pain-card__text">Sering bosan dan terlibat dalam aktiviti yang tidak sesuai?</p>
+        </div>
+        <div class="pain-card fade-in">
+          <div class="pain-card__num">4</div>
+          <p class="pain-card__text">Sukar fokus dan tidak dapat menumpukan perhatian?</p>
+        </div>
+      </div>
+      <div class="pain-cta fade-in">
+        <h3 style="font-family:'Nunito',sans-serif;font-weight:800;font-size:1.3rem;color:var(--amber);">
+          ♛ Chess For Kids Adalah Jawapannya!
+        </h3>
+        <p>Catur bukan sekadar permainan — ia alat pembangunan minda yang terbukti. Daftarkan anak anda hari ini dan lihat perubahan yang luar biasa.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BENEFITS & FEATURES ===== -->
+  <section class="section features" id="features">
+    <div class="container">
+      <div class="text-center">
+        <span class="section-label" aria-hidden="true">♞ Kelebihan Catur</span>
+        <h2 class="section-title" id="features-heading">
+          Apa Yang Anak Anda Akan Perolehi?
+        </h2>
+        <p class="section-subtitle">
+          Program CFK direka khas untuk kanak-kanak — menggabungkan pembelajaran sistematik dengan suasana yang menyeronokkan.
+        </p>
+      </div>
+
+      <div class="features__grid" id="featuresGrid">
+        <article class="feature-card fade-in">
+          <span class="feature-card__icon" aria-hidden="true">🧠</span>
+          <h3 class="feature-card__title">Fokus &amp; Kemahiran Kognitif</h3>
+          <p class="feature-card__desc">
+            Catur melatih otak untuk fokus lebih lama, meningkatkan kemahiran menyelesaikan masalah,
+            pemikiran strategik, dan keupayaan membuat keputusan yang lebih baik.
+          </p>
+        </article>
+
+        <article class="feature-card fade-in">
+          <span class="feature-card__icon" aria-hidden="true">♟</span>
+          <h3 class="feature-card__title">Keyakinan &amp; Disiplin Diri</h3>
+          <p class="feature-card__desc">
+            Setiap kemenangan membina keyakinan diri. Setiap cabaran mengajar kesabaran dan ketekunan.
+            Anak anda akan membesar menjadi individu yang lebih yakin dan berdisiplin.
+          </p>
+        </article>
+
+        <article class="feature-card fade-in">
+          <span class="feature-card__icon" aria-hidden="true">♛</span>
+          <h3 class="feature-card__title">Kelas Kumpulan Persendirian</h3>
+          <p class="feature-card__desc">
+            Maksimum 10 pelajar setiap sesi. Jurulatih berpengalaman 17 tahun memastikan setiap kanak-kanak
+            mendapat perhatian penuh dan kemajuan yang konsisten.
+          </p>
+        </article>
+      </div>
+
+      <!-- Benefits list -->
+      <div style="margin-top:52px; background:var(--cream); border-radius:var(--radius-lg); padding:36px 40px;">
+        <h3 style="font-family:'Nunito',sans-serif;font-weight:800;font-size:1.2rem;color:var(--navy);margin-bottom:22px;text-align:center;">
+          ✅ Semua Manfaat Chess For Kids
+        </h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;">
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:0.93rem;color:var(--text-main);">
+            <span style="color:var(--amber);font-size:1rem;flex-shrink:0;">✦</span>Fokus dan tumpuan yang lebih baik
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:0.93rem;color:var(--text-main);">
+            <span style="color:var(--amber);font-size:1rem;flex-shrink:0;">✦</span>Kemahiran menyelesaikan masalah
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:0.93rem;color:var(--text-main);">
+            <span style="color:var(--amber);font-size:1rem;flex-shrink:0;">✦</span>Pemikiran strategik
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:0.93rem;color:var(--text-main);">
+            <span style="color:var(--amber);font-size:1rem;flex-shrink:0;">✦</span>Peningkatan kemampuan kognitif
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:0.93rem;color:var(--text-main);">
+            <span style="color:var(--amber);font-size:1rem;flex-shrink:0;">✦</span>Kemahiran membuat keputusan yang lebih baik
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:0.93rem;color:var(--text-main);">
+            <span style="color:var(--amber);font-size:1rem;flex-shrink:0;">✦</span>Peningkatan kreativiti
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:0.93rem;color:var(--text-main);">
+            <span style="color:var(--amber);font-size:1rem;flex-shrink:0;">✦</span>Perancangan dan penyusunan yang lebih baik
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:0.93rem;color:var(--text-main);">
+            <span style="color:var(--amber);font-size:1rem;flex-shrink:0;">✦</span>Keyakinan dan harga diri yang meningkat
+          </div>
+          <div style="display:flex;gap:10px;align-items:flex-start;font-size:0.93rem;color:var(--text-main);">
+            <span style="color:var(--amber);font-size:1rem;flex-shrink:0;">✦</span>Kesabaran dan ketekunan yang diperkukuh
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PRICING ===== -->
+  <section class="section section--cream pricing" id="pricing">
+    <div class="container">
+      <div class="text-center">
+        <span class="section-label" aria-hidden="true">♝ Yuran Kelas</span>
+        <h2 class="section-title" id="pricing-heading">
+          Yuran Berpatutan, Kualiti Terjamin
+        </h2>
+        <p class="section-subtitle">
+          Satu harga untuk semua cawangan. Tiada bayaran tersembunyi. Cuba percuma 1 bulan dahulu!
+        </p>
+      </div>
+
+      <div class="pricing__grid" id="pricingGrid">
+
+        <!-- Registration Package -->
+        <article class="pricing-card fade-in" aria-label="Pakej Pendaftaran">
+          <span class="pricing-card__icon" aria-hidden="true">📋</span>
+          <div class="pricing-card__tier">Pakej Pendaftaran</div>
+          <div style="font-size:0.82rem;color:var(--text-muted);margin-bottom:6px;">Bayaran sekali sahaja</div>
+          <div class="pricing-card__price">
+            <span class="pricing-card__currency">RM</span><span class="pricing-card__amount">70</span>
+            <span class="pricing-card__period"> (sekali)</span>
+          </div>
+          <div class="pricing-card__divider"></div>
+          <ul class="pricing-card__features">
+            <li class="pricing-card__feature">
+              <span class="pricing-card__feature-icon">✦</span>Yuran Pendaftaran: RM 30
+            </li>
+            <li class="pricing-card__feature">
+              <span class="pricing-card__feature-icon">✦</span>Yuran Keahlian: RM 30
+            </li>
+            <li class="pricing-card__feature">
+              <span class="pricing-card__feature-icon">✦</span>Buku Modul: RM 10
+            </li>
+            <li class="pricing-card__feature">
+              <span class="pricing-card__feature-icon">🎁</span><strong>Set catur percuma!</strong>
+            </li>
+          </ul>
+          <a href="https://forms.gle/cySXhSezJeB1M3JH9" target="_blank" rel="noopener"
+             class="btn btn--outline btn--block" style="color:var(--navy);border-color:var(--navy-mid);">
+            Daftar Sekarang
+          </a>
+        </article>
+
+        <!-- Monthly Fee (highlighted) -->
+        <article class="pricing-card pricing-card--popular fade-in" aria-label="Yuran Bulanan — Paling Popular">
+          <div class="pricing-card__popular-badge">⭐ Tawaran Terbaik</div>
+          <span class="pricing-card__icon" aria-hidden="true">♟</span>
+          <div class="pricing-card__tier">Yuran Bulanan</div>
+          <div style="font-size:0.82rem;color:var(--amber-dark);margin-bottom:6px;">Semua 5 cawangan</div>
+          <div class="pricing-card__price">
+            <span class="pricing-card__currency">RM</span><span class="pricing-card__amount">70</span>
+            <span class="pricing-card__period"> /bulan</span>
+          </div>
+          <div class="pricing-card__divider"></div>
+          <ul class="pricing-card__features">
+            <li class="pricing-card__feature">
+              <span class="pricing-card__feature-icon">🎉</span><strong>1 bulan PERCUMA untuk pelajar baru!</strong>
+            </li>
+            <li class="pricing-card__feature">
+              <span class="pricing-card__feature-icon">✦</span>Akses ke SEMUA 5 cawangan di Perak
+            </li>
+            <li class="pricing-card__feature">
+              <span class="pricing-card__feature-icon">✦</span>Polisi Satu Harga — tiada caj tambahan
+            </li>
+            <li class="pricing-card__feature">
+              <span class="pricing-card__feature-icon">✦</span>Modul pembelajaran progresif &amp; sistematik
+            </li>
+            <li class="pricing-card__feature">
+              <span class="pricing-card__feature-icon">✦</span>Kumpulan kecil (maks 10 pelajar)
+            </li>
+          </ul>
+          <a href="https://forms.gle/cySXhSezJeB1M3JH9" target="_blank" rel="noopener"
+             class="btn btn--primary btn--block">
+            Tuntut Kelas Percuma ♞
+          </a>
+        </article>
+
+        <!-- First Month Total -->
+        <article class="pricing-card fade-in" aria-label="Jumlah Bulan Pertama">
+          <span class="pricing-card__icon" aria-hidden="true">💎</span>
+          <div class="pricing-card__tier">Jumlah Bulan Pertama</div>
+          <div style="font-size:0.82rem;color:var(--text-muted);margin-bottom:6px;">Semua termasuk</div>
+          <div class="pricing-card__price">
+            <span class="pricing-card__currency">RM</span><span class="pricing-card__amount">140</span>
+            <span class="pricing-card__period"> (bulan 1)</span>
+          </div>
+          <div class="pricing-card__divider"></div>
+          <ul class="pricing-card__features">
+            <li class="pricing-card__feature">
+              <span class="pricing-card__feature-icon">✦</span>Pakej pendaftaran (RM 70)
+            </li>
+            <li class="pricing-card__feature">
+              <span class="pricing-card__feature-icon">✦</span>Yuran bulan pertama (RM 70)
+            </li>
+            <li class="pricing-card__feature">
+              <span class="pricing-card__feature-icon">✦</span>Cuba percuma 1 bulan sebelum bayar
+            </li>
+            <li class="pricing-card__feature">
+              <span class="pricing-card__feature-icon">✦</span>Bulan seterusnya: RM 70/bulan sahaja
+            </li>
+            <li class="pricing-card__feature">
+              <span class="pricing-card__feature-icon">✦</span>Set catur percuma disertakan
+            </li>
+          </ul>
+          <a href="https://forms.gle/cySXhSezJeB1M3JH9" target="_blank" rel="noopener"
+             class="btn btn--outline btn--block" style="color:var(--navy);border-color:var(--navy-mid);">
+            Mula Sekarang
+          </a>
+        </article>
+
+      </div>
+
+      <!-- One-Price Policy callout -->
+      <div style="margin-top:40px;background:var(--navy);color:var(--white);border-radius:var(--radius-lg);padding:32px 36px;text-align:center;" class="fade-in">
+        <h3 style="font-family:'Nunito',sans-serif;font-weight:900;font-size:1.3rem;color:var(--amber);margin-bottom:12px;">
+          💠 Polisi Satu Harga untuk Semua Cawangan
+        </h3>
+        <p style="color:rgba(255,255,255,0.85);font-size:0.97rem;max-width:640px;margin:0 auto 18px;">
+          Bayar sekali, hadir di mana-mana. Pelajar CFK boleh menghadiri kelas di
+          <strong style="color:var(--amber);">mana-mana cawangan</strong> — Klebang, Tambun, Buntong, Sri Iskandar, atau Sungai Siput —
+          dengan yuran bulanan yang sama. Tiada caj tambahan, tiada syarat rumit.
+        </p>
+        <div style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;">
+          <span style="background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.35);border-radius:100px;padding:6px 16px;font-size:0.85rem;font-family:'Nunito',sans-serif;font-weight:700;color:var(--amber-light);">♟ Klebang</span>
+          <span style="background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.35);border-radius:100px;padding:6px 16px;font-size:0.85rem;font-family:'Nunito',sans-serif;font-weight:700;color:var(--amber-light);">♞ Tambun</span>
+          <span style="background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.35);border-radius:100px;padding:6px 16px;font-size:0.85rem;font-family:'Nunito',sans-serif;font-weight:700;color:var(--amber-light);">♝ Buntong</span>
+          <span style="background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.35);border-radius:100px;padding:6px 16px;font-size:0.85rem;font-family:'Nunito',sans-serif;font-weight:700;color:var(--amber-light);">♜ Sri Iskandar</span>
+          <span style="background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.35);border-radius:100px;padding:6px 16px;font-size:0.85rem;font-family:'Nunito',sans-serif;font-weight:700;color:var(--amber-light);">♛ Sungai Siput</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BRANCHES & SCHEDULE ===== -->
+  <section class="section branches-section" id="branches">
+    <div class="container">
+      <div class="text-center">
+        <span class="section-label">5 Cawangan di Perak</span>
+        <h2 class="section-title">Cawangan &amp; Jadual Kelas</h2>
+        <p class="section-subtitle">Pilih cawangan yang paling dekat dengan anda. Hubungi kami untuk menempah slot percuma!</p>
+      </div>
+
+      <div class="branches-grid">
+
+        <div class="branch-card fade-in">
+          <div class="branch-card__name">♟ CFK Klebang</div>
+          <p class="branch-card__address">5B, Laluan Klebang 21, Klebang Perdana, 31200 Chemor, Perak</p>
+          <div class="branch-card__schedule">
+            <div class="branch-card__schedule-item">
+              <span class="branch-card__schedule-icon">🕘</span>
+              <span><strong>Sabtu &amp; Ahad:</strong> 9:00 PG – 12:00 TGH</span>
+            </div>
+          </div>
+          <div style="margin-bottom:10px;font-size:0.85rem;color:rgba(255,255,255,0.70);">📞 019-572 7276</div>
+          <a href="https://maps.app.goo.gl/kyhybzQyepfV4bjg7" target="_blank" rel="noopener" class="branch-card__map">
+            📍 Lihat Lokasi
+          </a>
+        </div>
+
+        <div class="branch-card fade-in">
+          <div class="branch-card__name">♞ CFK Buntong</div>
+          <p class="branch-card__address">171, Persiaran Raja Mazwin Selatan, 30100 Ipoh, Perak</p>
+          <div class="branch-card__schedule">
+            <div class="branch-card__schedule-item">
+              <span class="branch-card__schedule-icon">🕗</span>
+              <span><strong>Sabtu:</strong> 8:00 MLM – 9:30 MLM</span>
+            </div>
+            <div class="branch-card__schedule-item">
+              <span class="branch-card__schedule-icon">🕗</span>
+              <span><strong>Rabu:</strong> 8:00 MLM – 9:30 MLM</span>
+            </div>
+          </div>
+          <a href="https://maps.app.goo.gl/zxzhqin2XbJVacnr8" target="_blank" rel="noopener" class="branch-card__map">
+            📍 Lihat Lokasi
+          </a>
+        </div>
+
+        <div class="branch-card fade-in">
+          <div class="branch-card__name">♝ CFK Tambun</div>
+          <p class="branch-card__address">No.38A, Jalan Koperasi, Taman Perpaduan Koperasi, 31400 Ipoh, Perak</p>
+          <div class="branch-card__schedule">
+            <div class="branch-card__schedule-item">
+              <span class="branch-card__schedule-icon">🕗</span>
+              <span><strong>Isnin:</strong> 8:00 MLM – 9:30 MLM</span>
+            </div>
+          </div>
+          <a href="https://maps.app.goo.gl/ge16BRoYnTua3FNx5" target="_blank" rel="noopener" class="branch-card__map">
+            📍 Lihat Lokasi
+          </a>
+        </div>
+
+        <div class="branch-card fade-in">
+          <div class="branch-card__name">♜ CFK Sungai Siput</div>
+          <p class="branch-card__address">SJKT Mahatma Gandhi Kalasalai, Jalan Besar Kuala Kangsar, 31100 Sungai Siput, Perak</p>
+          <div class="branch-card__schedule">
+            <div class="branch-card__schedule-item">
+              <span class="branch-card__schedule-icon">🕗</span>
+              <span><strong>Selasa:</strong> 8:00 MLM – 9:30 MLM</span>
+            </div>
+          </div>
+          <a href="#enroll" class="branch-card__map">📍 Hubungi Kami</a>
+        </div>
+
+        <div class="branch-card fade-in">
+          <div class="branch-card__name">♛ YOSH Chess Academy — Sri Iskandar</div>
+          <p class="branch-card__address">244, Persiaran SIBC 8, Bandar Seri Iskandar, 32600 Bota, Perak</p>
+          <div class="branch-card__schedule">
+            <div class="branch-card__schedule-item">
+              <span class="branch-card__schedule-icon">🕗</span>
+              <span><strong>Khamis:</strong> 8:30 MLM – 10:00 MLM</span>
+            </div>
+          </div>
+          <a href="https://maps.app.goo.gl/9bDd3FFDjwx5QhB39" target="_blank" rel="noopener" class="branch-card__map">
+            📍 Lihat Lokasi
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ENROLLMENT / CONTACT ===== -->
+  <section class="section enrollment" id="enroll">
+    <div class="container">
+      <div class="enrollment__inner">
+
+        <div class="enrollment__info fade-in">
+          <span class="section-label">Daftar Hari Ini</span>
+          <h2 class="section-title">Mulakan Perjalanan Catur Anak Anda!</h2>
+          <p>
+            Cuba percuma selama 1 bulan — tiada risiko! Isi borang pendaftaran online
+            atau hubungi kami terus. Tempat terhad, daftar segera sebelum penuh!
+          </p>
+
+          <div class="enrollment__contact-items">
+            <div class="enrollment__contact-item">
+              <div class="enrollment__contact-icon">📞</div>
+              <span><strong>019-572 7276</strong> (CFK Klebang)</span>
+            </div>
+            <div class="enrollment__contact-item">
+              <div class="enrollment__contact-icon">📍</div>
+              <span>5 Cawangan di seluruh Perak</span>
+            </div>
+            <div class="enrollment__contact-item">
+              <div class="enrollment__contact-icon">🕐</div>
+              <span>Isnin–Ahad (ikut jadual cawangan)</span>
+            </div>
+            <div class="enrollment__contact-item">
+              <div class="enrollment__contact-icon">🎁</div>
+              <span>Set catur percuma semasa pendaftaran</span>
+            </div>
+          </div>
+
+          <!-- Payment info -->
+          <div class="payment-box">
+            <div class="payment-box__title">💳 Maklumat Pembayaran</div>
+            <div class="payment-box__row">
+              <span class="payment-box__label">Bank:</span>
+              <span>Maybank</span>
+            </div>
+            <div class="payment-box__row">
+              <span class="payment-box__label">No. Akaun:</span>
+              <span><strong>158015108369</strong></span>
+            </div>
+            <div class="payment-box__row">
+              <span class="payment-box__label">Nama:</span>
+              <span>Khatib bin Md Yan</span>
+            </div>
+          </div>
+
+          <a href="https://forms.gle/cySXhSezJeB1M3JH9" target="_blank" rel="noopener"
+             class="btn btn--primary btn--lg" style="margin-top:22px;width:100%;justify-content:center;">
+            ♟ Daftar via Google Form
+          </a>
+        </div>
+
+        <div class="enrollment__form-wrap fade-in">
+          <h3 class="form__title">♞ Hantar Pertanyaan</h3>
+          <p style="font-size:0.9rem;color:var(--text-muted);margin-bottom:20px;">
+            Ada soalan? Isi borang ini dan kami akan menghubungi anda dalam masa 24 jam.
+          </p>
+
+          <form id="enrollForm" novalidate aria-label="Borang pertanyaan">
+            <div class="form__row">
+              <div class="form__group">
+                <label class="form__label" for="fieldName">
+                  Nama Ibu Bapa / Penjaga <span>*</span>
+                </label>
+                <input type="text" id="fieldName" name="name" class="form__control"
+                       placeholder="cth. Ahmad bin Ali" required autocomplete="name" />
+              </div>
+              <div class="form__group">
+                <label class="form__label" for="fieldEmail">
+                  E-mel <span>*</span>
+                </label>
+                <input type="email" id="fieldEmail" name="email" class="form__control"
+                       placeholder="anda@email.com" required autocomplete="email" />
+              </div>
+            </div>
+            <div class="form__row">
+              <div class="form__group">
+                <label class="form__label" for="fieldAge">
+                  Umur Pelajar <span>*</span>
+                </label>
+                <input type="number" id="fieldAge" name="studentAge" class="form__control"
+                       placeholder="cth. 8" min="4" max="18" required />
+              </div>
+              <div class="form__group">
+                <label class="form__label" for="fieldLevel">
+                  Tahap Catur <span>*</span>
+                </label>
+                <select id="fieldLevel" name="chessLevel" class="form__control" required>
+                  <option value="" disabled selected>Pilih tahap…</option>
+                  <option value="Beginner">Pemula — Belum pernah main</option>
+                  <option value="Intermediate">Pertengahan — Tahu asas</option>
+                  <option value="Advanced">Lanjutan — Sudah bertanding</option>
+                </select>
+              </div>
+            </div>
+            <div class="form__group">
+              <label class="form__label" for="fieldMessage">Mesej / Soalan</label>
+              <textarea id="fieldMessage" name="message" class="form__control" rows="3"
+                        placeholder="Beritahu kami tentang anak anda atau sebarang soalan…"></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary btn--block btn--lg" id="submitBtn">
+              Hantar Pertanyaan ♛
+            </button>
+            <div id="formStatus" class="form__status" role="alert" aria-live="polite"></div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" aria-label="Site footer">
+    <div class="footer__inner">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <div class="footer__brand-name">
+            <span aria-hidden="true">♟</span>
+            Chess For <span>Kids</span>
+          </div>
+          <p>
+            Membina generasi muda Malaysia yang berfikiran strategik melalui permainan catur.
+            Beroperasi di Perak sejak 2018.
+          </p>
+        </div>
+        <div>
+          <div class="footer__col-title">Pautan Pantas</div>
+          <ul class="footer__links">
+            <li><a href="#why">Kenapa CFK?</a></li>
+            <li><a href="#features">Kelebihan</a></li>
+            <li><a href="#pricing">Yuran</a></li>
+            <li><a href="#branches">Cawangan</a></li>
+            <li><a href="#enroll">Daftar</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Cawangan</div>
+          <ul class="footer__links">
+            <li><a href="#branches">CFK Klebang</a></li>
+            <li><a href="#branches">CFK Buntong</a></li>
+            <li><a href="#branches">CFK Tambun</a></li>
+            <li><a href="#branches">CFK Sungai Siput</a></li>
+            <li><a href="#branches">YOSH Sri Iskandar</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Hubungi Kami</div>
+          <ul class="footer__links">
+            <li><a href="tel:+60195727276">019-572 7276</a></li>
+            <li><a href="https://forms.gle/cySXhSezJeB1M3JH9" target="_blank" rel="noopener">Borang Pendaftaran</a></li>
+            <li><a href="#enroll">Hantar Pertanyaan</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">
+          &copy; <span id="footerYear"></span> Chess For Kids (CFK). Hak Cipta Terpelihara.
+        </p>
+        <div class="footer__chess-pieces" aria-hidden="true">♟ ♞ ♝ ♜ ♛ ♚</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    'use strict';
+
+    /* 1. Chess board decoration */
+    const PIECES = {
+      0: ['♜','♞','♝','♛','♚','♝','♞','♜'],
+      1: ['♟','♟','♟','♟','♟','♟','♟','♟'],
+      6: ['♙','♙','♙','♙','♙','♙','♙','♙'],
+      7: ['♖','♘','♗','♕','♔','♗','♘','♖']
+    };
+    (function buildBoard() {
+      const board = document.getElementById('heroBoardDeco');
+      if (!board) return;
+      const frag = document.createDocumentFragment();
+      for (let r = 0; r < 8; r++) {
+        for (let c = 0; c < 8; c++) {
+          const cell = document.createElement('div');
+          cell.className = 'chess-board-deco__cell chess-board-deco__cell--' + ((r+c)%2===0?'light':'dark');
+          if (PIECES[r]) cell.textContent = PIECES[r][c] || '';
+          frag.appendChild(cell);
+        }
+      }
+      board.appendChild(frag);
+    })();
+
+    /* 2. Scroll fade-in */
+    if (window.IntersectionObserver) {
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+    } else {
+      document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible'));
+    }
+
+    /* 3. Load features from API */
+    const FALLBACK_FEATURES = [
+      { icon: '🧠', title: 'Fokus & Kemahiran Kognitif', description: 'Catur melatih otak untuk fokus lebih lama, meningkatkan kemahiran menyelesaikan masalah, pemikiran strategik, dan keupayaan membuat keputusan yang lebih baik.' },
+      { icon: '♟', title: 'Keyakinan & Disiplin Diri', description: 'Setiap kemenangan membina keyakinan diri. Setiap cabaran mengajar kesabaran dan ketekunan.' },
+      { icon: '♛', title: 'Kelas Kumpulan Persendirian', description: 'Maksimum 10 pelajar setiap sesi. Jurulatih berpengalaman 17 tahun memastikan setiap kanak-kanak mendapat perhatian penuh.' }
+    ];
+
+    function renderFeatures(list) {
+      const grid = document.getElementById('featuresGrid');
+      if (!grid) return;
+      grid.innerHTML = list.map((f, i) =>
+        `<article class="feature-card fade-in visible" style="animation-delay:${i*100}ms">
+          <span class="feature-card__icon" aria-hidden="true">${esc(f.icon||'♟')}</span>
+          <h3 class="feature-card__title">${esc(f.title)}</h3>
+          <p class="feature-card__desc">${esc(f.description)}</p>
+        </article>`
+      ).join('');
+    }
+
+    fetch('/api/features').then(r => r.ok ? r.json() : Promise.reject())
+      .then(d => Array.isArray(d) && d.length && renderFeatures(d))
+      .catch(() => renderFeatures(FALLBACK_FEATURES));
+
+    /* 4. Load pricing from API */
+    const FALLBACK_PRICING = [
+      { icon:'📋', tier:'Pakej Pendaftaran', subtitle:'Bayaran sekali sahaja', amount:'70', period:'(sekali)', popular:false, ctaLabel:'Daftar Sekarang',
+        features:['Yuran Pendaftaran: RM 30','Yuran Keahlian: RM 30','Buku Modul: RM 10','🎁 Set catur percuma!'] },
+      { icon:'♟', tier:'Yuran Bulanan', subtitle:'Semua 5 cawangan', amount:'70', period:'/bulan', popular:true, ctaLabel:'Tuntut Kelas Percuma ♞',
+        features:['🎉 1 bulan PERCUMA untuk pelajar baru!','Akses ke SEMUA 5 cawangan di Perak','Polisi Satu Harga — tiada caj tambahan','Modul pembelajaran progresif & sistematik','Kumpulan kecil (maks 10 pelajar)'] },
+      { icon:'💎', tier:'Jumlah Bulan Pertama', subtitle:'Semua termasuk', amount:'140', period:'(bulan 1)', popular:false, ctaLabel:'Mula Sekarang',
+        features:['Pakej pendaftaran (RM 70)','Yuran bulan pertama (RM 70)','Cuba percuma 1 bulan sebelum bayar','Bulan seterusnya: RM 70/bulan sahaja','Set catur percuma disertakan'] }
+    ];
+
+    function renderPricing(plans) {
+      const grid = document.getElementById('pricingGrid');
+      if (!grid) return;
+      const regUrl = 'https://forms.gle/cySXhSezJeB1M3JH9';
+      grid.innerHTML = plans.map((p, i) => {
+        const featHtml = (p.features||[]).map(f => `<li class="pricing-card__feature"><span class="pricing-card__feature-icon">✦</span>${esc(f)}</li>`).join('');
+        const popular = p.popular || p.highlight;
+        const btnClass = popular ? 'btn btn--primary btn--block' : 'btn btn--outline btn--block';
+        const btnStyle = popular ? '' : ' style="color:var(--navy);border-color:var(--navy-mid);"';
+        return `<article class="pricing-card${popular?' pricing-card--popular':''} fade-in visible" style="animation-delay:${i*120}ms">
+          ${popular ? '<div class="pricing-card__popular-badge">⭐ Tawaran Terbaik</div>' : ''}
+          <span class="pricing-card__icon">${esc(p.icon||'♟')}</span>
+          <div class="pricing-card__tier">${esc(p.tier)}</div>
+          ${p.subtitle ? `<div style="font-size:0.82rem;color:${popular?'var(--amber-dark)':'var(--text-muted)'};margin-bottom:6px;">${esc(p.subtitle)}</div>` : ''}
+          <div class="pricing-card__price">
+            <span class="pricing-card__currency">RM</span><span class="pricing-card__amount">${esc(String(p.amount))}</span>
+            <span class="pricing-card__period"> ${esc(p.period||'/bulan')}</span>
+          </div>
+          <div class="pricing-card__divider"></div>
+          <ul class="pricing-card__features">${featHtml}</ul>
+          <a href="${regUrl}" target="_blank" rel="noopener" class="${btnClass}"${btnStyle}>${esc(p.ctaLabel||'Daftar')}</a>
+        </article>`;
+      }).join('');
+    }
+
+    fetch('/api/pricing').then(r => r.ok ? r.json() : Promise.reject())
+      .then(d => Array.isArray(d) && d.length && renderPricing(d))
+      .catch(() => renderPricing(FALLBACK_PRICING));
+
+    /* 5. Contact form */
+    (function initForm() {
+      const form = document.getElementById('enrollForm');
+      const status = document.getElementById('formStatus');
+      const btn = document.getElementById('submitBtn');
+      if (!form) return;
+
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        status.className = 'form__status';
+        status.textContent = '';
+
+        const name       = form.elements.name.value.trim();
+        const email      = form.elements.email.value.trim();
+        const studentAge = form.elements.studentAge.value.trim();
+        const chessLevel = form.elements.chessLevel.value;
+        const message    = form.elements.message.value.trim();
+
+        if (!name || !email || !studentAge || !chessLevel) {
+          return showStatus('error', 'Sila lengkapkan semua medan bertanda *.');
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          return showStatus('error', 'Sila masukkan alamat e-mel yang sah.');
+        }
+        const age = parseInt(studentAge, 10);
+        if (isNaN(age) || age < 4 || age > 18) {
+          return showStatus('error', 'Sila masukkan umur pelajar yang sah (4–18).');
+        }
+
+        btn.disabled = true;
+        btn.textContent = 'Menghantar…';
+
+        fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, studentAge: age, chessLevel, message })
+        })
+          .then(r => r.ok ? r.json() : Promise.reject())
+          .then(() => {
+            showStatus('success', `✓ Terima kasih, ${name}! Kami akan menghubungi anda dalam masa 24 jam. Untuk pendaftaran rasmi, sila gunakan borang Google Form kami.`);
+            form.reset();
+          })
+          .catch(() => showStatus('error', 'Ralat berlaku. Sila hubungi kami terus di 019-572 7276.'))
+          .finally(() => { btn.disabled = false; btn.textContent = 'Hantar Pertanyaan ♛'; });
+      });
+
+      function showStatus(type, msg) {
+        status.className = 'form__status form__status--' + type;
+        status.textContent = msg;
+        status.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    })();
+
+    /* 6. Footer year */
+    const yr = document.getElementById('footerYear');
+    if (yr) yr.textContent = new Date().getFullYear();
+
+    function esc(s) {
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    }
+  }());
+  </script>
+</body>
+</html>

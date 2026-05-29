@@ -1,0 +1,22 @@
+{
+  "name": "cfk",
+  "version": "1.0.0",
+  "description": "CFK Academy is an online chess coaching platform for young players. This repository contains the backend API server that powers the CFK Academy website, providing structured data for features, pricing, and a contact/enrollment form.",
+  "main": "src/server.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  }
+}
