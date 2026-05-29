@@ -759,6 +759,10 @@ document.getElementById('confirmOrderBtn').addEventListener('click',async()=>{
       setTimeout(function(){ window.open(waUrl, '_blank'); }, 600);
 
       cart=[]; saveCart(); updateCartUI();
+      // Reset semua butang "Dalam Troli" → "Tambah ke Troli"
+      document.querySelectorAll('.add-btn.add-btn--in').forEach(btn=>{
+        btn.className='add-btn add-btn--add'; btn.textContent='+ Tambah ke Troli';
+      });
     }
   }catch(e){
     alert('Ralat. Sila hubungi 019-572 7276.');
