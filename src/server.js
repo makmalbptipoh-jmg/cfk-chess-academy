@@ -26,6 +26,8 @@ app.use(express.static(__dirname));
 // Explicit static routes (Vercel serverless fallback)
 app.get('/', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
 app.get('/index.html', (req, res) => res.sendFile(path.join(__dirname, 'index.html')));
+app.get('/daftar', (req, res) => res.sendFile(path.join(__dirname, 'daftar.html')));
+app.get('/daftar.html', (req, res) => res.sendFile(path.join(__dirname, 'daftar.html')));
 app.get('/styles.css', (req, res) => res.sendFile(path.join(__dirname, 'styles.css')));
 
 // ── Academy endpoints ─────────────────────────────────────────────────────────

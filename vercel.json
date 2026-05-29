@@ -7,6 +7,7 @@
       "config": {
         "includeFiles": [
           "src/index.html",
+          "src/daftar.html",
           "src/shop.html",
           "src/styles.css",
           "src/products-data.json",
