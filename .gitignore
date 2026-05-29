@@ -2,3 +2,5 @@ node_modules/
 docs/products-raw.json
 *.output
 .env
+
+.vercel
