@@ -145,8 +145,22 @@
       <a href="https://forms.gle/cySXhSezJeB1M3JH9" target="_blank" rel="noopener" class="btn btn--primary" style="padding:10px 22px;font-size:0.92rem;">
         Daftar Sekarang ♚
       </a>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Buka menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu" role="navigation">
+    <a href="#why" onclick="closeMobileMenu()">Kenapa CFK?</a>
+    <a href="#features" onclick="closeMobileMenu()">Kelebihan</a>
+    <a href="#pricing" onclick="closeMobileMenu()">Yuran</a>
+    <a href="#branches" onclick="closeMobileMenu()">Cawangan</a>
+    <a href="#enroll" onclick="closeMobileMenu()">Daftar</a>
+    <a href="/shop" onclick="closeMobileMenu()" style="color:var(--amber)">🛒 Kedai</a>
+    <a href="https://forms.gle/cySXhSezJeB1M3JH9" target="_blank" rel="noopener" class="btn btn--primary">Daftar Sekarang ♚</a>
+  </div>
 
   <!-- ===== HERO ===== -->
   <section class="hero" aria-label="Hero">
@@ -852,10 +866,35 @@
     const yr = document.getElementById('footerYear');
     if (yr) yr.textContent = new Date().getFullYear();
 
+    /* 7. Hamburger menu */
+    const hamburger = document.getElementById('navHamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', () => {
+        const isOpen = mobileMenu.classList.toggle('open');
+        hamburger.classList.toggle('open', isOpen);
+        hamburger.setAttribute('aria-expanded', isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      });
+      // Close on outside click
+      document.addEventListener('click', e => {
+        if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) {
+          closeMobileMenu();
+        }
+      });
+    }
+
     function esc(s) {
       return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
     }
   }());
+
+  function closeMobileMenu() {
+    document.getElementById('mobileMenu')?.classList.remove('open');
+    const h = document.getElementById('navHamburger');
+    if (h) { h.classList.remove('open'); h.setAttribute('aria-expanded','false'); }
+    document.body.style.overflow = '';
+  }
   </script>
 </body>
 </html>
