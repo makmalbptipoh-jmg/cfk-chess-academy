@@ -521,7 +521,7 @@ function renderProducts(){
   loadProductImages();
 }
 
-// ── Lazy product image loading ────────────────────────────────────────────────
+// ── Batch image loading (1 request per page, not 1 per card) ─────────────────
 function loadProductImages(){
   const grid = document.getElementById('productGrid');
   if(!grid) return;
@@ -529,54 +529,43 @@ function loadProductImages(){
   const cards = Array.from(grid.querySelectorAll('.p-card[data-id]'));
   if(!cards.length) return;
 
-  const observe = typeof IntersectionObserver !== 'undefined';
-  const ioOptions = { rootMargin: '200px 0px', threshold: 0 };
-
-  function fetchImage(card){
+  // Collect all titles on this page
+  const titleMap = {}; // title -> card
+  cards.forEach(card => {
     const img = card.querySelector('.p-card__cover');
-    const fallback = card.querySelector('.p-card__cover-fallback');
     if(!img || img.dataset.loaded) return;
-    img.dataset.loaded = '1';
+    const title = decodeURIComponent(img.dataset.title || '');
+    if(title) titleMap[title] = card;
+  });
 
-    const encTitle = img.dataset.title;
-    if(!encTitle) return;
+  const titles = Object.keys(titleMap);
+  if(!titles.length) return;
 
-    fetch('/api/product-image?title=' + encTitle)
-      .then(r => r.ok ? r.json() : Promise.reject())
-      .then(data => {
-        if(data && data.url){
-          img.onload = () => {
-            fallback.style.display = 'none';
-            img.style.display = 'block';
-          };
-          img.onerror = () => {
-            img.style.display = 'none';
-            fallback.style.display = 'flex';
-          };
-          // Route through local proxy to bypass hotlink protection
-          img.src = '/api/img?url=' + encodeURIComponent(data.url);
-        }
-        // if url is null, fallback stays visible (default)
-      })
-      .catch(() => {
-        // network error — fallback stays visible
-      });
-  }
+  // Single batch request for all titles on this page
+  fetch('/api/product-images-batch', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ titles })
+  })
+  .then(r => r.ok ? r.json() : Promise.reject())
+  .then(urlMap => {
+    // urlMap = { "Product Title": "https://...", ... }
+    titles.forEach(title => {
+      const url = urlMap[title];
+      const card = titleMap[title];
+      if(!card) return;
+      const img = card.querySelector('.p-card__cover');
+      const fallback = card.querySelector('.p-card__cover-fallback');
+      if(!img || !fallback) return;
+      img.dataset.loaded = '1';
+      if(!url) return; // no image, keep fallback
+      img.onload = () => { fallback.style.display='none'; img.style.display='block'; };
+      img.onerror = () => { img.style.display='none'; fallback.style.display='flex'; };
+      img.src = '/api/img?url=' + encodeURIComponent(url);
+    });
+  })
+  .catch(() => { /* keep fallback gradients */ });
 
-  if(observe){
-    const io = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          fetchImage(entry.target);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, ioOptions);
-    cards.forEach(card => io.observe(card));
-  } else {
-    // Fallback: load all immediately if no IntersectionObserver
-    cards.forEach(card => fetchImage(card));
-  }
 }
 
 // ── Filter/search ─────────────────────────────────────────────────────────────

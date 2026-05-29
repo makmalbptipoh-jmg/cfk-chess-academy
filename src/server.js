@@ -118,11 +118,19 @@ app.get('/api/img', async (req, res) => {
   }
 });
 
-// ── Image lookup ──────────────────────────────────────────────────────────────
+// ── Image lookup (single) ─────────────────────────────────────────────────────
 app.get('/api/product-image', (req, res) => {
   const title = decodeURIComponent(req.query.title || '');
-  const url   = PRODUCT_IMAGES[title] || null;
-  res.json({ url });
+  res.json({ url: PRODUCT_IMAGES[title] || null });
+});
+
+// ── Image lookup (batch) — send all titles at once, get back map ──────────────
+app.post('/api/product-images-batch', (req, res) => {
+  const titles = req.body?.titles;
+  if (!Array.isArray(titles)) return res.status(400).json({ error: 'titles array required' });
+  const result = {};
+  titles.forEach(t => { if (PRODUCT_IMAGES[t]) result[t] = PRODUCT_IMAGES[t]; });
+  res.json(result);
 });
 
 app.post('/api/reload-images', (req, res) => {
@@ -145,10 +153,10 @@ app.post('/api/admin/set-image', (req, res) => {
       JSON.stringify(PRODUCT_IMAGES),
       'utf8'
     );
-    res.json({ success: true });
   } catch(e) {
-    res.status(500).json({ success: false, message: 'Gagal tulis fail.' });
+    // Vercel serverless: filesystem is read-only — changes kept in-memory only
   }
+  res.json({ success: true });
 });
 
 app.get('/shop', (req, res) => res.sendFile(path.join(__dirname, 'shop.html')));
