@@ -745,8 +745,8 @@ function updateCartUI(){
   }
   foot.style.display='block';
 
-  // Kira item percuma dulu sebelum render
-  const {freeIds} = cartTotal();
+  // Kira semua nilai sekali sahaja
+  const {subtotal,freeValue,total,freeIds,eligibleCount,maxFree,unclaimedCount,neededNext,claimableItem} = cartTotal();
 
   list.innerHTML = cart.map(item=>{
     const isFree = freeIds && freeIds.has(item.id);
@@ -782,9 +782,6 @@ function updateCartUI(){
       if(gridBtn){ gridBtn.className='add-btn add-btn--add'; gridBtn.textContent='+ Tambah ke Troli'; }
     });
   });
-
-  // Promo and totals
-  const {subtotal,freeValue,total,freeIds,eligibleCount,maxFree,unclaimedCount,neededNext,claimableItem} = cartTotal();
   const promoMsg = document.getElementById('cartPromoMsg');
   const freeRow  = document.getElementById('freeRow');
 
