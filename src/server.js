@@ -150,7 +150,12 @@ app.get('/shop', (req, res) => res.sendFile(path.join(__dirname, 'shop.html')));
 
 app.use((req, res) => res.status(404).json({ error:'Not found' }));
 
-app.listen(PORT, () => {
-  console.log(`CFK server running at http://localhost:${PORT}`);
-  console.log(`Products loaded: ${PRODUCTS.length}`);
-});
+// Start server locally; export for Vercel serverless
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`CFK server running at http://localhost:${PORT}`);
+    console.log(`Products loaded: ${PRODUCTS.length}`);
+  });
+}
+
+module.exports = app;
