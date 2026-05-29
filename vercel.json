@@ -9,6 +9,8 @@
           "src/index.html",
           "src/daftar.html",
           "src/shop.html",
+          "src/analytics.js",
+          "src/social-preview.png",
           "src/styles.css",
           "src/products-data.json",
           "src/product-images.json"
