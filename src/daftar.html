@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Borang Pendaftaran Rasmi CFK Academy — Daftarkan anak anda ke kelas catur sekarang. 5 cawangan di Perak." />
+  <title>Borang Pendaftaran — CFK Academy</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Page-specific overrides ── */
+    .daftar-hero {
+      background: linear-gradient(135deg, var(--navy) 0%, #1a2f5a 60%, #0f1f40 100%);
+      padding: 80px 0 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .daftar-hero::before {
+      content: '♟ ♞ ♝ ♜ ♛ ♚';
+      position: absolute;
+      top: 16px; left: 0; right: 0;
+      font-size: 1.6rem;
+      opacity: 0.06;
+      letter-spacing: 18px;
+      user-select: none;
+    }
+    .daftar-hero__badge {
+      display: inline-block;
+      background: rgba(245,158,11,0.18);
+      border: 1px solid rgba(245,158,11,0.40);
+      color: var(--amber-light, #fbbf24);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      padding: 6px 18px;
+      border-radius: 100px;
+      margin-bottom: 18px;
+      letter-spacing: 0.3px;
+    }
+    .daftar-hero__title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2rem, 5vw, 3rem);
+      color: var(--white, #fff);
+      margin-bottom: 12px;
+      line-height: 1.15;
+    }
+    .daftar-hero__title .accent { color: var(--amber, #f59e0b); }
+    .daftar-hero__sub {
+      color: rgba(255,255,255,0.72);
+      font-size: 1.05rem;
+      max-width: 560px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ── Steps bar ── */
+    .steps-bar {
+      background: var(--cream, #fdf8f0);
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      padding: 22px 0;
+    }
+    .steps-bar__inner {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+    }
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      flex: 1;
+      position: relative;
+    }
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 16px; left: calc(50% + 16px);
+      right: calc(-50% + 16px);
+      height: 2px;
+      background: #e2d9c8;
+    }
+    .step.active:not(:last-child)::after,
+    .step.done:not(:last-child)::after { background: var(--amber, #f59e0b); }
+    .step__num {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: #e2d9c8;
+      color: #999;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; z-index: 1;
+      transition: background 0.3s, color 0.3s;
+    }
+    .step.active .step__num { background: var(--amber, #f59e0b); color: var(--navy, #1e3a5f); }
+    .step.done .step__num { background: #10b981; color: #fff; }
+    .step__label { font-size: 0.75rem; color: #999; font-weight: 600; text-align: center; }
+    .step.active .step__label { color: var(--navy, #1e3a5f); font-weight: 700; }
+    .step.done .step__label { color: #10b981; }
+
+    /* ── Main form card ── */
+    .daftar-main {
+      background: var(--cream, #fdf8f0);
+      min-height: 60vh;
+      padding: 48px 20px 80px;
+    }
+    .daftar-card {
+      background: var(--white, #fff);
+      border-radius: 16px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.09);
+      max-width: 780px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .daftar-card__header {
+      background: var(--navy, #1e3a5f);
+      padding: 26px 36px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .daftar-card__header-icon {
+      font-size: 2rem;
+      background: rgba(245,158,11,0.18);
+      border-radius: 12px;
+      width: 52px; height: 52px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .daftar-card__header-title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800; font-size: 1.25rem;
+      color: var(--white, #fff);
+      margin-bottom: 2px;
+    }
+    .daftar-card__header-sub { font-size: 0.88rem; color: rgba(255,255,255,0.65); }
+    .daftar-card__body { padding: 36px; }
+
+    /* ── Section headings inside form ── */
+    .form-section-title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800; font-size: 1rem;
+      color: var(--navy, #1e3a5f);
+      border-bottom: 2px solid var(--amber, #f59e0b);
+      padding-bottom: 8px;
+      margin-bottom: 22px;
+      margin-top: 32px;
+    }
+    .form-section-title:first-child { margin-top: 0; }
+
+    /* ── Form controls (supplement styles.css) ── */
+    .form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .form__row--3 { grid-template-columns: 1fr 1fr 1fr; }
+    .form__group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+    .form__label {
+      font-size: 0.875rem; font-weight: 600;
+      color: var(--text-main, #2d3748);
+    }
+    .form__label span { color: var(--amber, #f59e0b); margin-left: 2px; }
+    .form__control {
+      border: 1.5px solid #ddd;
+      border-radius: 8px;
+      padding: 11px 14px;
+      font-size: 0.95rem;
+      font-family: 'Inter', sans-serif;
+      color: var(--text-main, #2d3748);
+      background: #fff;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .form__control:focus {
+      outline: none;
+      border-color: var(--amber, #f59e0b);
+      box-shadow: 0 0 0 3px rgba(245,158,11,0.15);
+    }
+    .form__control.error { border-color: #ef4444; }
+    .form__control.error:focus { box-shadow: 0 0 0 3px rgba(239,68,68,0.15); }
+    select.form__control { cursor: pointer; }
+    textarea.form__control { resize: vertical; min-height: 90px; }
+    .field-hint { font-size: 0.78rem; color: var(--text-muted, #888); margin-top: 3px; }
+
+    /* ── Radio group (gender) ── */
+    .radio-group { display: flex; gap: 16px; flex-wrap: wrap; padding-top: 4px; }
+    .radio-label {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.92rem; color: var(--text-main, #2d3748);
+      cursor: pointer;
+      padding: 9px 18px;
+      border: 1.5px solid #ddd;
+      border-radius: 8px;
+      transition: border-color 0.2s, background 0.2s;
+      flex: 1; min-width: 120px; justify-content: center;
+    }
+    .radio-label:hover { border-color: var(--amber, #f59e0b); background: rgba(245,158,11,0.04); }
+    .radio-label input[type=radio] { accent-color: var(--amber, #f59e0b); width: 16px; height: 16px; }
+    .radio-label:has(input:checked) {
+      border-color: var(--amber, #f59e0b);
+      background: rgba(245,158,11,0.08);
+      font-weight: 700;
+    }
+
+    /* ── Pakej selector ── */
+    .pakej-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .pakej-card {
+      border: 2px solid #e2d9c8;
+      border-radius: 10px;
+      padding: 16px 18px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      position: relative;
+    }
+    .pakej-card:hover { border-color: var(--amber, #f59e0b); background: rgba(245,158,11,0.03); }
+    .pakej-card input[type=radio] { position: absolute; opacity: 0; width: 0; height: 0; }
+    .pakej-card.selected {
+      border-color: var(--amber, #f59e0b);
+      background: rgba(245,158,11,0.07);
+    }
+    .pakej-card.selected .pakej-card__check { opacity: 1; }
+    .pakej-card__check {
+      position: absolute; top: 10px; right: 12px;
+      width: 20px; height: 20px;
+      background: var(--amber, #f59e0b);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; color: var(--navy, #1e3a5f); font-weight: 900;
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .pakej-card__icon { font-size: 1.4rem; margin-bottom: 6px; }
+    .pakej-card__name {
+      font-family: 'Nunito', sans-serif; font-weight: 800;
+      font-size: 0.95rem; color: var(--navy, #1e3a5f);
+      margin-bottom: 4px;
+    }
+    .pakej-card__price {
+      font-family: 'Nunito', sans-serif; font-weight: 900;
+      font-size: 1.3rem; color: var(--amber, #f59e0b);
+    }
+    .pakej-card__desc { font-size: 0.78rem; color: var(--text-muted, #888); margin-top: 4px; }
+
+    /* ── Consent box ── */
+    .consent-box {
+      background: var(--cream, #fdf8f0);
+      border: 1px solid rgba(245,158,11,0.30);
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-top: 8px;
+    }
+    .consent-label {
+      display: flex; gap: 12px; align-items: flex-start;
+      font-size: 0.875rem; color: var(--text-main, #2d3748);
+      cursor: pointer; line-height: 1.55;
+    }
+    .consent-label input[type=checkbox] {
+      width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px;
+      accent-color: var(--amber, #f59e0b);
+    }
+
+    /* ── Submit button area ── */
+    .submit-area { margin-top: 32px; }
+    .btn--submit {
+      width: 100%;
+      padding: 16px;
+      font-size: 1.05rem;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      border: none;
+      cursor: pointer;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--amber, #f59e0b), #e08c00);
+      color: var(--navy, #1e3a5f);
+      transition: opacity 0.2s, transform 0.15s;
+      letter-spacing: 0.3px;
+    }
+    .btn--submit:hover:not(:disabled) { opacity: 0.92; transform: translateY(-1px); }
+    .btn--submit:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+    /* ── Status messages ── */
+    .form__status {
+      margin-top: 16px;
+      padding: 14px 18px;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      display: none;
+    }
+    .form__status.show { display: block; }
+    .form__status--success { background: #ecfdf5; color: #065f46; border: 1px solid #6ee7b7; }
+    .form__status--error { background: #fef2f2; color: #991b1b; border: 1px solid #fca5a5; }
+    .form__status--loading { background: #eff6ff; color: #1e40af; border: 1px solid #93c5fd; }
+
+    /* ── Success overlay ── */
+    .success-overlay {
+      display: none;
+      text-align: center;
+      padding: 48px 36px;
+    }
+    .success-overlay.show { display: block; }
+    .success-overlay__icon { font-size: 4rem; margin-bottom: 16px; }
+    .success-overlay__title {
+      font-family: 'Nunito', sans-serif; font-weight: 900;
+      font-size: 1.6rem; color: var(--navy, #1e3a5f); margin-bottom: 12px;
+    }
+    .success-overlay__sub { color: var(--text-muted, #888); font-size: 0.98rem; line-height: 1.6; margin-bottom: 28px; }
+    .success-ref {
+      background: var(--cream, #fdf8f0);
+      border: 1.5px solid var(--amber, #f59e0b);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 0 auto 28px;
+      max-width: 360px;
+    }
+    .success-ref__label { font-size: 0.8rem; color: var(--text-muted, #888); margin-bottom: 4px; }
+    .success-ref__num {
+      font-family: 'Nunito', sans-serif; font-weight: 900;
+      font-size: 1.3rem; color: var(--navy, #1e3a5f); letter-spacing: 2px;
+    }
+
+    /* ── Info sidebar ── */
+    .daftar-layout {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 32px;
+      padding: 0 20px;
+    }
+    .daftar-sidebar { align-self: start; }
+    .info-card {
+      background: var(--white, #fff);
+      border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .info-card__header {
+      background: var(--navy, #1e3a5f);
+      padding: 14px 18px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800; font-size: 0.95rem;
+      color: var(--white, #fff);
+    }
+    .info-card__body { padding: 18px; }
+    .info-item {
+      display: flex; gap: 10px; align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      font-size: 0.875rem;
+    }
+    .info-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .info-item__icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+    .info-item__label { font-weight: 600; color: var(--text-muted, #888); font-size: 0.78rem; margin-bottom: 2px; }
+    .info-item__val { color: var(--text-main, #2d3748); font-weight: 500; }
+
+    /* ── Responsive ── */
+    @media (max-width: 860px) {
+      .daftar-layout { grid-template-columns: 1fr; }
+      .daftar-sidebar { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    }
+    @media (max-width: 600px) {
+      .daftar-card__body { padding: 22px 18px; }
+      .daftar-card__header { padding: 20px 20px; }
+      .form__row, .form__row--3 { grid-template-columns: 1fr; }
+      .pakej-grid { grid-template-columns: 1fr; }
+      .daftar-sidebar { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="navbar__inner">
+      <a href="./index.html" class="navbar__brand" aria-label="CFK Academy home">
+        <span class="navbar__brand-icon" aria-hidden="true">♟</span>
+        CFK <span>Academy</span>
+      </a>
+      <ul class="navbar__links" role="list">
+        <li><a href="./index.html#why">Kenapa CFK?</a></li>
+        <li><a href="./index.html#features">Kelebihan</a></li>
+        <li><a href="./index.html#pricing">Yuran</a></li>
+        <li><a href="./index.html#branches">Cawangan</a></li>
+        <li><a href="./daftar.html" style="color:var(--amber);font-weight:700;">Daftar</a></li>
+        <li><a href="/shop" style="color:var(--amber);">🛒 Kedai</a></li>
+      </ul>
+      <a href="./daftar.html" class="btn btn--primary" style="padding:10px 22px;font-size:0.92rem;">
+        Daftar Sekarang ♚
+      </a>
+      <button class="nav-hamburger" id="navHamburger" aria-label="Buka menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu" role="navigation">
+    <a href="./index.html#why" onclick="closeMobileMenu()">Kenapa CFK?</a>
+    <a href="./index.html#features" onclick="closeMobileMenu()">Kelebihan</a>
+    <a href="./index.html#pricing" onclick="closeMobileMenu()">Yuran</a>
+    <a href="./index.html#branches" onclick="closeMobileMenu()">Cawangan</a>
+    <a href="./daftar.html" onclick="closeMobileMenu()" style="color:var(--amber);font-weight:700;">Daftar</a>
+    <a href="/shop" onclick="closeMobileMenu()" style="color:var(--amber)">🛒 Kedai</a>
+    <a href="./daftar.html" class="btn btn--primary">Daftar Sekarang ♚</a>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="daftar-hero">
+    <div class="container">
+      <div class="daftar-hero__badge">♟ Pendaftaran Terbuka 2026 — Cuba Percuma 1 Bulan!</div>
+      <h1 class="daftar-hero__title">
+        Borang <span class="accent">Pendaftaran</span> Rasmi
+      </h1>
+      <p class="daftar-hero__sub">
+        Isi borang di bawah dan pasukan kami akan menghubungi anda dalam masa 24 jam untuk
+        mengesahkan slot dan butiran kelas.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== STEPS ===== -->
+  <div class="steps-bar">
+    <div class="steps-bar__inner">
+      <div class="step active" id="step1">
+        <div class="step__num">1</div>
+        <div class="step__label">Isi Borang</div>
+      </div>
+      <div class="step" id="step2">
+        <div class="step__num">2</div>
+        <div class="step__label">Pengesahan</div>
+      </div>
+      <div class="step" id="step3">
+        <div class="step__num">3</div>
+        <div class="step__label">Bayaran</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <div class="daftar-main">
+    <div class="daftar-layout">
+
+      <!-- FORM CARD -->
+      <div>
+        <div class="daftar-card">
+          <div class="daftar-card__header">
+            <div class="daftar-card__header-icon">♛</div>
+            <div>
+              <div class="daftar-card__header-title">Maklumat Pendaftaran</div>
+              <div class="daftar-card__header-sub">Sila lengkapkan semua medan bertanda <span style="color:var(--amber);">*</span></div>
+            </div>
+          </div>
+
+          <!-- Form body -->
+          <div class="daftar-card__body" id="formBody">
+
+            <form id="daftarForm" novalidate>
+
+              <!-- SECTION 1: Parent/Guardian -->
+              <div class="form-section-title">👨‍👩‍👧 Maklumat Ibu Bapa / Penjaga</div>
+              <div class="form__row">
+                <div class="form__group">
+                  <label class="form__label" for="fNamaPenjaga">Nama Penuh <span>*</span></label>
+                  <input type="text" id="fNamaPenjaga" name="nama_penjaga" class="form__control"
+                         placeholder="cth. Ahmad bin Ali" required autocomplete="name" />
+                </div>
+                <div class="form__group">
+                  <label class="form__label" for="fTelefon">No. Telefon <span>*</span></label>
+                  <input type="tel" id="fTelefon" name="telefon" class="form__control"
+                         placeholder="cth. 019-572 7276" required autocomplete="tel" />
+                  <span class="field-hint">WhatsApp aktif lebih baik</span>
+                </div>
+              </div>
+              <div class="form__group">
+                <label class="form__label" for="fEmail">Alamat E-mel <span>*</span></label>
+                <input type="email" id="fEmail" name="email" class="form__control"
+                       placeholder="anda@email.com" required autocomplete="email" />
+              </div>
+
+              <!-- SECTION 2: Student -->
+              <div class="form-section-title">🎓 Maklumat Pelajar</div>
+              <div class="form__row">
+                <div class="form__group">
+                  <label class="form__label" for="fNamaPelajar">Nama Penuh Pelajar <span>*</span></label>
+                  <input type="text" id="fNamaPelajar" name="nama_pelajar" class="form__control"
+                         placeholder="cth. Nurul Aisyah binti Ahmad" required />
+                </div>
+                <div class="form__group">
+                  <label class="form__label" for="fUmur">Umur Pelajar <span>*</span></label>
+                  <input type="number" id="fUmur" name="umur" class="form__control"
+                         placeholder="cth. 8" min="4" max="18" required />
+                  <span class="field-hint">Antara 4 – 18 tahun</span>
+                </div>
+              </div>
+              <div class="form__group">
+                <label class="form__label">Jantina Pelajar <span>*</span></label>
+                <div class="radio-group" id="jantinaBtns">
+                  <label class="radio-label">
+                    <input type="radio" name="jantina" value="Lelaki" required /> ♟ Lelaki
+                  </label>
+                  <label class="radio-label">
+                    <input type="radio" name="jantina" value="Perempuan" /> ♛ Perempuan
+                  </label>
+                </div>
+              </div>
+
+              <!-- SECTION 3: Class Preference -->
+              <div class="form-section-title">📍 Pilihan Kelas</div>
+              <div class="form__row">
+                <div class="form__group">
+                  <label class="form__label" for="fCawangan">Cawangan Pilihan <span>*</span></label>
+                  <select id="fCawangan" name="cawangan" class="form__control" required>
+                    <option value="" disabled selected>Pilih cawangan…</option>
+                    <option value="CFK Klebang">♟ CFK Klebang (Sabtu &amp; Ahad, 9pg–12tgh)</option>
+                    <option value="CFK Buntong">♞ CFK Buntong (Sabtu &amp; Rabu, 8mlm–9:30mlm)</option>
+                    <option value="CFK Tambun">♝ CFK Tambun (Isnin, 8mlm–9:30mlm)</option>
+                    <option value="CFK Sungai Siput">♜ CFK Sungai Siput (Selasa, 8mlm–9:30mlm)</option>
+                    <option value="YOSH Sri Iskandar">♛ YOSH Sri Iskandar (Khamis, 8:30mlm–10mlm)</option>
+                  </select>
+                </div>
+                <div class="form__group">
+                  <label class="form__label" for="fTahap">Tahap Catur Semasa <span>*</span></label>
+                  <select id="fTahap" name="tahap_catur" class="form__control" required>
+                    <option value="" disabled selected>Pilih tahap…</option>
+                    <option value="Pemula">🟢 Pemula — Belum pernah main</option>
+                    <option value="Pertengahan">🟡 Pertengahan — Tahu asas catur</option>
+                    <option value="Lanjutan">🔴 Lanjutan — Sudah pernah bertanding</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- SECTION 4: Package -->
+              <div class="form-section-title">💳 Pakej Pendaftaran</div>
+              <div class="pakej-grid" id="pakejGrid">
+                <label class="pakej-card selected" data-val="Pakej Lengkap (RM140)">
+                  <input type="radio" name="pakej" value="Pakej Lengkap (RM140)" checked />
+                  <div class="pakej-card__check">✓</div>
+                  <div class="pakej-card__icon">⭐</div>
+                  <div class="pakej-card__name">Pakej Lengkap</div>
+                  <div class="pakej-card__price">RM 140</div>
+                  <div class="pakej-card__desc">Pendaftaran + Bulan Pertama. Set catur percuma!</div>
+                </label>
+                <label class="pakej-card" data-val="Pendaftaran Sahaja (RM70)">
+                  <input type="radio" name="pakej" value="Pendaftaran Sahaja (RM70)" />
+                  <div class="pakej-card__check">✓</div>
+                  <div class="pakej-card__icon">📋</div>
+                  <div class="pakej-card__name">Pendaftaran Sahaja</div>
+                  <div class="pakej-card__price">RM 70</div>
+                  <div class="pakej-card__desc">Yuran pendaftaran, keahlian &amp; buku modul</div>
+                </label>
+              </div>
+              <div style="margin-top:10px; padding:12px 16px; background:rgba(245,158,11,0.08); border-radius:8px; font-size:0.83rem; color:var(--text-muted);">
+                💡 <strong>Cuba percuma 1 bulan</strong> — Bayar yuran bulanan (RM70) hanya selepas bulan percuma selesai.
+              </div>
+
+              <!-- SECTION 5: Notes -->
+              <div class="form-section-title" style="margin-top:28px;">📝 Maklumat Tambahan</div>
+              <div class="form__group">
+                <label class="form__label" for="fMesej">Mesej / Pertanyaan</label>
+                <textarea id="fMesej" name="mesej" class="form__control" rows="3"
+                          placeholder="Beritahu kami tentang anak anda, atau sebarang soalan yang ada…"></textarea>
+              </div>
+
+              <!-- SECTION 6: Consent -->
+              <div class="consent-box">
+                <label class="consent-label">
+                  <input type="checkbox" id="fConsent" name="consent" required />
+                  <span>
+                    Saya bersetuju bahawa maklumat yang diberikan adalah tepat dan boleh digunakan oleh
+                    <strong>CFK Academy</strong> untuk tujuan pendaftaran dan komunikasi berkaitan kelas catur.
+                  </span>
+                </label>
+              </div>
+
+              <!-- SUBMIT -->
+              <div class="submit-area">
+                <button type="submit" class="btn--submit" id="submitBtn">
+                  ♚ Hantar Pendaftaran Sekarang
+                </button>
+                <div id="formStatus" class="form__status" role="alert" aria-live="polite"></div>
+              </div>
+
+            </form>
+          </div><!-- /form body -->
+
+          <!-- SUCCESS STATE -->
+          <div class="success-overlay" id="successOverlay">
+            <div class="success-overlay__icon">🎉</div>
+            <h2 class="success-overlay__title">Pendaftaran Berjaya Dihantar!</h2>
+            <p class="success-overlay__sub">
+              Terima kasih kerana mendaftar ke <strong>CFK Academy</strong>!<br />
+              Pasukan kami akan menghubungi anda dalam masa <strong>24 jam</strong>
+              untuk mengesahkan slot dan butiran pembayaran.
+            </p>
+            <div class="success-ref">
+              <div class="success-ref__label">No. Rujukan Pendaftaran</div>
+              <div class="success-ref__num" id="refNum">—</div>
+            </div>
+            <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+              <a href="./index.html" class="btn btn--outline" style="padding:12px 28px;">
+                ← Kembali ke Laman Utama
+              </a>
+              <a href="https://wa.me/60195727276" target="_blank" rel="noopener"
+                 class="btn btn--primary" style="padding:12px 28px;">
+                📱 WhatsApp Kami
+              </a>
+            </div>
+          </div>
+
+        </div><!-- /daftar-card -->
+      </div><!-- /form col -->
+
+      <!-- SIDEBAR -->
+      <aside class="daftar-sidebar">
+
+        <div class="info-card">
+          <div class="info-card__header">📞 Hubungi Kami</div>
+          <div class="info-card__body">
+            <div class="info-item">
+              <div class="info-item__icon">📱</div>
+              <div>
+                <div class="info-item__label">WhatsApp / Telefon</div>
+                <div class="info-item__val"><a href="tel:+60195727276" style="color:var(--navy);font-weight:700;">019-572 7276</a></div>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-item__icon">🕐</div>
+              <div>
+                <div class="info-item__label">Waktu Respons</div>
+                <div class="info-item__val">Dalam masa 24 jam</div>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-item__icon">📍</div>
+              <div>
+                <div class="info-item__label">Cawangan</div>
+                <div class="info-item__val">5 lokasi di seluruh Perak</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-card__header">💳 Maklumat Bayaran</div>
+          <div class="info-card__body">
+            <div class="info-item">
+              <div class="info-item__icon">🏦</div>
+              <div>
+                <div class="info-item__label">Bank</div>
+                <div class="info-item__val">Maybank</div>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-item__icon">🔢</div>
+              <div>
+                <div class="info-item__label">No. Akaun</div>
+                <div class="info-item__val" style="font-weight:800;font-size:1rem;font-family:'Nunito',sans-serif;">158015108369</div>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-item__icon">👤</div>
+              <div>
+                <div class="info-item__label">Nama Akaun</div>
+                <div class="info-item__val">Khatib bin Md Yan</div>
+              </div>
+            </div>
+            <div style="margin-top:12px; padding:10px 12px; background:rgba(245,158,11,0.08); border-radius:8px; font-size:0.8rem; color:var(--text-muted);">
+              ⚠️ Bayar hanya selepas mendapat pengesahan dari pasukan kami.
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-card__header">🎁 Apa Yang Anda Dapat</div>
+          <div class="info-card__body">
+            <div class="info-item">
+              <div class="info-item__icon">♟</div>
+              <div><div class="info-item__val">Set catur percuma</div></div>
+            </div>
+            <div class="info-item">
+              <div class="info-item__icon">📚</div>
+              <div><div class="info-item__val">Buku modul pembelajaran</div></div>
+            </div>
+            <div class="info-item">
+              <div class="info-item__icon">🎉</div>
+              <div><div class="info-item__val">1 bulan kelas percuma</div></div>
+            </div>
+            <div class="info-item">
+              <div class="info-item__icon">🏆</div>
+              <div><div class="info-item__val">Peluang ke kejohanan</div></div>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+
+    </div><!-- /daftar-layout -->
+  </div><!-- /daftar-main -->
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" aria-label="Site footer">
+    <div class="footer__inner">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <div class="footer__brand-name"><span aria-hidden="true">♟</span> CFK <span>Academy</span></div>
+          <p>Membina generasi muda Malaysia yang berfikiran strategik melalui permainan catur.</p>
+        </div>
+        <div>
+          <div class="footer__col-title">Pautan Pantas</div>
+          <ul class="footer__links">
+            <li><a href="./index.html#why">Kenapa CFK?</a></li>
+            <li><a href="./index.html#pricing">Yuran</a></li>
+            <li><a href="./index.html#branches">Cawangan</a></li>
+            <li><a href="./daftar.html">Daftar</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer__col-title">Hubungi Kami</div>
+          <ul class="footer__links">
+            <li><a href="tel:+60195727276">019-572 7276</a></li>
+            <li><a href="https://wa.me/60195727276" target="_blank" rel="noopener">WhatsApp</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">&copy; <span id="footerYear"></span> CFK Academy. Hak Cipta Terpelihara.</p>
+        <div class="footer__chess-pieces" aria-hidden="true">♟ ♞ ♝ ♜ ♛ ♚</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    'use strict';
+
+    /* ══════════════════════════════════════════════════
+       STEP 1 — Paste your Google Apps Script URL here
+       after deploying it. See apps-script/Code.gs
+    ══════════════════════════════════════════════════ */
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxN2DsYcy19wfclPqaLA59BMdt77JJc5SZaquxn6i4JWvNMrrP3AqsMxsXlMA95l9_ngA/exec';
+
+    /* ── Pakej card toggle ── */
+    document.querySelectorAll('.pakej-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.pakej-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        card.querySelector('input[type=radio]').checked = true;
+      });
+    });
+
+    /* ── Form submit ── */
+    const form    = document.getElementById('daftarForm');
+    const status  = document.getElementById('formStatus');
+    const btn     = document.getElementById('submitBtn');
+    const overlay = document.getElementById('successOverlay');
+    const refNum  = document.getElementById('refNum');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      clearStatus();
+
+      /* --- Gather values --- */
+      const nama_penjaga  = v('fNamaPenjaga');
+      const telefon       = v('fTelefon');
+      const email         = v('fEmail');
+      const nama_pelajar  = v('fNamaPelajar');
+      const umur          = v('fUmur');
+      const jantina       = document.querySelector('input[name="jantina"]:checked')?.value || '';
+      const cawangan      = v('fCawangan');
+      const tahap_catur   = v('fTahap');
+      const pakej         = document.querySelector('input[name="pakej"]:checked')?.value || '';
+      const mesej         = v('fMesej');
+      const consent       = document.getElementById('fConsent').checked;
+
+      /* --- Validate --- */
+      if (!nama_penjaga) return err('fNamaPenjaga', 'Sila masukkan nama ibu bapa / penjaga.');
+      if (!telefon)       return err('fTelefon',     'Sila masukkan nombor telefon.');
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+                          return err('fEmail',        'Sila masukkan alamat e-mel yang sah.');
+      if (!nama_pelajar)  return err('fNamaPelajar', 'Sila masukkan nama pelajar.');
+      const age = parseInt(umur, 10);
+      if (isNaN(age) || age < 4 || age > 18)
+                          return err('fUmur',         'Sila masukkan umur yang sah (4–18 tahun).');
+      if (!jantina)       return showStatus('error', 'Sila pilih jantina pelajar.');
+      if (!cawangan)      return err('fCawangan',    'Sila pilih cawangan.');
+      if (!tahap_catur)   return err('fTahap',       'Sila pilih tahap catur.');
+      if (!consent)       return showStatus('error', 'Sila bersetuju dengan terma pendaftaran.');
+
+      /* --- Submit --- */
+      btn.disabled = true;
+      btn.textContent = '⏳ Menghantar…';
+      showStatus('loading', '⏳ Sedang menghantar maklumat anda…');
+
+      const payload = {
+        timestamp:    new Date().toLocaleString('ms-MY', { timeZone: 'Asia/Kuala_Lumpur' }),
+        nama_penjaga, telefon, email,
+        nama_pelajar, umur: age, jantina,
+        cawangan, tahap_catur, pakej, mesej,
+        sumber: 'Borang Web CFK Academy'
+      };
+
+      /* Use text/plain to avoid CORS preflight issues with Apps Script */
+      fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      })
+      .then(() => {
+        /* no-cors means we can't read response — treat any resolve as success */
+        const ref = 'CFK-' + Date.now().toString(36).toUpperCase();
+        refNum.textContent = ref;
+        document.getElementById('formBody').style.display = 'none';
+        overlay.classList.add('show');
+        document.getElementById('step1').classList.remove('active');
+        document.getElementById('step1').classList.add('done');
+        document.getElementById('step2').classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      })
+      .catch(() => {
+        showStatus('error', '❌ Ralat berlaku. Sila cuba semula atau hubungi kami di 019-572 7276.');
+        btn.disabled = false;
+        btn.textContent = '♚ Hantar Pendaftaran Sekarang';
+      });
+    });
+
+    function v(id) { return (document.getElementById(id)?.value || '').trim(); }
+
+    function err(fieldId, msg) {
+      const el = document.getElementById(fieldId);
+      if (el) { el.classList.add('error'); el.focus(); }
+      showStatus('error', '⚠️ ' + msg);
+    }
+
+    function showStatus(type, msg) {
+      status.className = 'form__status form__status--' + type + ' show';
+      status.textContent = msg;
+      status.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function clearStatus() {
+      status.className = 'form__status';
+      status.textContent = '';
+      document.querySelectorAll('.form__control.error').forEach(el => el.classList.remove('error'));
+    }
+
+    /* ── Remove error state on input ── */
+    document.querySelectorAll('.form__control').forEach(el => {
+      el.addEventListener('input', () => el.classList.remove('error'));
+    });
+
+    /* ── Hamburger ── */
+    const hamburger  = document.getElementById('navHamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', () => {
+        const isOpen = mobileMenu.classList.toggle('open');
+        hamburger.classList.toggle('open', isOpen);
+        hamburger.setAttribute('aria-expanded', isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+      });
+      document.addEventListener('click', e => {
+        if (!hamburger.contains(e.target) && !mobileMenu.contains(e.target)) closeMobileMenu();
+      });
+    }
+
+    /* ── Footer year ── */
+    const yr = document.getElementById('footerYear');
+    if (yr) yr.textContent = new Date().getFullYear();
+
+  }());
+
+  function closeMobileMenu() {
+    document.getElementById('mobileMenu')?.classList.remove('open');
+    const h = document.getElementById('navHamburger');
+    if (h) { h.classList.remove('open'); h.setAttribute('aria-expanded', 'false'); }
+    document.body.style.overflow = '';
+  }
+  </script>
+</body>
+</html>

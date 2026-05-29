@@ -142,7 +142,7 @@
         <li><a href="#enroll">Daftar</a></li>
         <li><a href="/shop" style="color:var(--amber);">🛒 Kedai</a></li>
       </ul>
-      <a href="https://forms.gle/cySXhSezJeB1M3JH9" target="_blank" rel="noopener" class="btn btn--primary" style="padding:10px 22px;font-size:0.92rem;">
+      <a href="./daftar.html" class="btn btn--primary" style="padding:10px 22px;font-size:0.92rem;">
         Daftar Sekarang ♚
       </a>
       <button class="nav-hamburger" id="navHamburger" aria-label="Buka menu" aria-expanded="false">
@@ -159,7 +159,7 @@
     <a href="#branches" onclick="closeMobileMenu()">Cawangan</a>
     <a href="#enroll" onclick="closeMobileMenu()">Daftar</a>
     <a href="/shop" onclick="closeMobileMenu()" style="color:var(--amber)">🛒 Kedai</a>
-    <a href="https://forms.gle/cySXhSezJeB1M3JH9" target="_blank" rel="noopener" class="btn btn--primary">Daftar Sekarang ♚</a>
+    <a href="./daftar.html" class="btn btn--primary">Daftar Sekarang ♚</a>
   </div>
 
   <!-- ===== HERO ===== -->
@@ -178,7 +178,7 @@
           yang membantu fokus, kreativiti, dan keyakinan diri — dalam suasana yang seronok!
         </p>
         <div class="hero__actions">
-          <a href="https://forms.gle/cySXhSezJeB1M3JH9" target="_blank" rel="noopener" class="btn btn--primary btn--lg">
+          <a href="./daftar.html" class="btn btn--primary btn--lg">
             ♟ Daftar Sekarang — Cuba Percuma
           </a>
           <a href="#branches" class="btn btn--outline btn--lg">
@@ -361,7 +361,7 @@
               <span class="pricing-card__feature-icon">🎁</span><strong>Set catur percuma!</strong>
             </li>
           </ul>
-          <a href="https://forms.gle/cySXhSezJeB1M3JH9" target="_blank" rel="noopener"
+          <a href="./daftar.html"
              class="btn btn--outline btn--block" style="color:var(--navy);border-color:var(--navy-mid);">
             Daftar Sekarang
           </a>
@@ -395,7 +395,7 @@
               <span class="pricing-card__feature-icon">✦</span>Kumpulan kecil (maks 10 pelajar)
             </li>
           </ul>
-          <a href="https://forms.gle/cySXhSezJeB1M3JH9" target="_blank" rel="noopener"
+          <a href="./daftar.html"
              class="btn btn--primary btn--block">
             Tuntut Kelas Percuma ♞
           </a>
@@ -428,7 +428,7 @@
               <span class="pricing-card__feature-icon">✦</span>Set catur percuma disertakan
             </li>
           </ul>
-          <a href="https://forms.gle/cySXhSezJeB1M3JH9" target="_blank" rel="noopener"
+          <a href="./daftar.html"
              class="btn btn--outline btn--block" style="color:var(--navy);border-color:var(--navy-mid);">
             Mula Sekarang
           </a>
@@ -594,7 +594,7 @@
             </div>
           </div>
 
-          <a href="https://forms.gle/cySXhSezJeB1M3JH9" target="_blank" rel="noopener"
+          <a href="./daftar.html"
              class="btn btn--primary btn--lg" style="margin-top:22px;width:100%;justify-content:center;">
             ♟ Daftar via Google Form
           </a>
@@ -697,7 +697,7 @@
           <div class="footer__col-title">Hubungi Kami</div>
           <ul class="footer__links">
             <li><a href="tel:+60195727276">019-572 7276</a></li>
-            <li><a href="https://forms.gle/cySXhSezJeB1M3JH9" target="_blank" rel="noopener">Borang Pendaftaran</a></li>
+            <li><a href="./daftar.html">Borang Pendaftaran</a></li>
             <li><a href="#enroll">Hantar Pertanyaan</a></li>
           </ul>
         </div>
@@ -783,7 +783,7 @@
     function renderPricing(plans) {
       const grid = document.getElementById('pricingGrid');
       if (!grid) return;
-      const regUrl = 'https://forms.gle/cySXhSezJeB1M3JH9';
+      const regUrl = './daftar.html';
       grid.innerHTML = plans.map((p, i) => {
         const featHtml = (p.features||[]).map(f => `<li class="pricing-card__feature"><span class="pricing-card__feature-icon">✦</span>${esc(f)}</li>`).join('');
         const popular = p.popular || p.highlight;
