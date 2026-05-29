@@ -482,6 +482,33 @@ ul { list-style: none; }
   100% { transform: rotateX(22deg) rotateY(360deg); }
 }
 
+@keyframes spinCubeAlt {
+  0%   { transform: rotateX(-15deg) rotateY(360deg); }
+  100% { transform: rotateX(-15deg) rotateY(0deg); }
+}
+
+/* Background decorative cube */
+.bg-cube-wrap {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.055;
+}
+.bg-cube-wrap .chess-cube-scene {
+  --cube-sz: 440px;
+  --cube-half: 220px;
+}
+.bg-cube-wrap .chess-cube-scene.sm {
+  --cube-sz: 320px;
+  --cube-half: 160px;
+}
+.bg-cube-wrap .chess-cube { animation: spinCube 26s linear infinite; }
+.bg-cube-wrap.alt .chess-cube { animation: spinCubeAlt 30s linear infinite; }
+
+/* Sections need position:relative & overflow:hidden for background cube */
+.section { position: relative; overflow: hidden; }
+.hero     { position: relative; overflow: hidden; }
+
 /* ---------- Features Section ---------- */
 .features {}
 
