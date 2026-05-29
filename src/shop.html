@@ -509,17 +509,20 @@ function stars(r){ const full=Math.round(r); return '★'.repeat(full)+'☆'.rep
 function saveCart(){ localStorage.setItem('cfk_cart', JSON.stringify(cart)); }
 function inCart(id){ return cart.some(c=>c.id===id); }
 function cartTotal(){
-  // Buy 2 Get 1 Free on video+ebook only (cheapest item free)
+  // Beli 2 Percuma 1 — Video & E-Book sahaja (item paling murah percuma)
   const eligible = cart.filter(c=>c.category==='video'||c.category==='ebook');
   const eligibleQty = eligible.reduce((s,c)=>s+c.qty,0);
-  const freeQty = Math.floor(eligibleQty/2); // buy 2 get 1 free
-  // get cheapest eligible items sorted asc
+  const freeQty = Math.floor(eligibleQty/3); // setiap 3 item → 1 percuma
+  // susun harga dari murah ke mahal, ambil freeQty item paling murah
   let allEligPrices = [];
   eligible.forEach(c=>{ for(let i=0;i<c.qty;i++) allEligPrices.push(c.price); });
   allEligPrices.sort((a,b)=>a-b);
   const freeValue = allEligPrices.slice(0,freeQty).reduce((s,p)=>s+p,0);
   const subtotal = cart.reduce((s,c)=>s+c.price*c.qty,0);
-  return { subtotal, freeValue, total: subtotal - freeValue, freeQty, eligibleQty };
+  // berapa item lagi untuk percuma seterusnya
+  const remainder = eligibleQty % 3;
+  const neededNext = remainder === 0 ? 3 : (3 - remainder);
+  return { subtotal, freeValue, total: subtotal - freeValue, freeQty, eligibleQty, neededNext };
 }
 function totalItems(){ return cart.reduce((s,c)=>s+c.qty,0); }
 
@@ -704,17 +707,15 @@ function updateCartUI(){
   });
 
   // Promo and totals
-  const {subtotal,freeValue,total,freeQty,eligibleQty} = cartTotal();
+  const {subtotal,freeValue,total,freeQty,eligibleQty,neededNext} = cartTotal();
   const promoMsg = document.getElementById('cartPromoMsg');
   const freeRow  = document.getElementById('freeRow');
-  const eligible = eligibleQty;
-  const needed   = eligible===0 ? 2 : 1; // always need 1 more to unlock next free
-  if(eligible>=2){
-    promoMsg.innerHTML = `<strong>🎉 Tahniah!</strong> Anda layak untuk ${freeQty} item percuma!`;
+  if(freeQty > 0){
+    promoMsg.innerHTML = `<strong>🎉 Tahniah!</strong> ${freeQty} item percuma digunakan! Tambah <strong>${neededNext} lagi</strong> untuk percuma seterusnya.`;
     freeRow.style.display='flex';
-    document.getElementById('freeAmt').textContent=`- RM ${freeValue}`;
+    document.getElementById('freeAmt').textContent=`- RM ${freeValue.toFixed(2)}`;
   } else {
-    promoMsg.innerHTML = `♟ Tambah <strong>${needed} lagi</strong> Video/E-Book untuk dapatkan 1 percuma!`;
+    promoMsg.innerHTML = `♟ Tambah <strong>${neededNext} lagi</strong> Video/E-Book — Beli 2 Percuma 1!`;
     freeRow.style.display='none';
   }
   document.getElementById('cartSubtotal').textContent=`RM ${subtotal}`;
