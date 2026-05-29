@@ -440,11 +440,11 @@
       <!-- Success state -->
       <div class="success-box" id="orderSuccess">
         <h3>✅ Pesanan Diterima!</h3>
-        <p>Terima kasih! Produk digital akan dihantar ke e-mel anda dalam masa 24 jam selepas pembayaran disahkan.</p>
-        <p>Sila buat bayaran ke akaun Maybank di atas dan hantar bukti bayaran.</p>
+        <p>Terima kasih! Pasukan kami akan semak stok dan hubungi anda dalam masa <strong>24 jam</strong>.</p>
+        <p style="margin-top:6px;">Sila buat bayaran ke akaun Maybank di atas selepas stok disahkan.</p>
         <div class="order-id" id="successOrderId"></div>
-        <a href="https://forms.gle/cySXhSezJeB1M3JH9" target="_blank" rel="noopener" class="gform-link">
-          📋 Isi Borang Pengesahan Rasmi
+        <a id="waConfirmLink" href="#" target="_blank" rel="noopener" class="gform-link" style="background:var(--navy);color:#fff;border-color:var(--navy);margin-top:14px;">
+          📱 WhatsApp Semula Jika Tiada Respons
         </a>
       </div>
 
@@ -752,6 +752,31 @@ function closeModal(){
 }
 
 // ── Confirm order ─────────────────────────────────────────────────────────────
+var ADMIN_WHATSAPP = '60195727276'; // nombor WhatsApp admin
+
+function buildWhatsAppMsg(orderId, name, phone, email, items, total){
+  var lines = [];
+  lines.push('🛒 *PESANAN BARU — CFK Kedai Digital*');
+  lines.push('━━━━━━━━━━━━━━━━━━━━');
+  lines.push('*ID Pesanan:* ' + orderId);
+  lines.push('');
+  lines.push('*👤 Maklumat Pelanggan*');
+  lines.push('Nama: ' + name);
+  lines.push('Tel: ' + phone);
+  lines.push('Emel: ' + email);
+  lines.push('');
+  lines.push('*🛍 Item Pesanan*');
+  items.forEach(function(item){
+    var subtotal = (parseFloat(item.price) * item.qty).toFixed(2);
+    lines.push('• ' + item.title + ' x' + item.qty + ' = RM ' + subtotal);
+  });
+  lines.push('');
+  lines.push('*💰 JUMLAH: RM ' + parseFloat(total).toFixed(2) + '*');
+  lines.push('━━━━━━━━━━━━━━━━━━━━');
+  lines.push('_Sila semak stok & sahkan pesanan ini._');
+  return lines.join('\n');
+}
+
 document.getElementById('confirmOrderBtn').addEventListener('click',async()=>{
   const name  = document.getElementById('o_name').value.trim();
   const email = document.getElementById('o_email').value.trim();
@@ -773,6 +798,13 @@ document.getElementById('confirmOrderBtn').addEventListener('click',async()=>{
       document.getElementById('orderFormSection').style.display='none';
       document.getElementById('orderSuccess').style.display='block';
       document.getElementById('successOrderId').textContent=`ID Pesanan: ${data.orderId}`;
+
+      // Buka WhatsApp admin dengan butiran pesanan
+      const msg = buildWhatsAppMsg(data.orderId, name, phone, email, cart, total);
+      const waUrl = 'https://wa.me/' + ADMIN_WHATSAPP + '?text=' + encodeURIComponent(msg);
+      document.getElementById('waConfirmLink').href = waUrl;
+      setTimeout(function(){ window.open(waUrl, '_blank'); }, 600);
+
       cart=[]; saveCart(); updateCartUI();
     }
   }catch(e){
