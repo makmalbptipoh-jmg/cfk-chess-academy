@@ -153,22 +153,16 @@
   .cart-empty{text-align:center;padding:40px 16px;color:var(--text-muted);}
   .cart-empty p{font-size:2.5rem;margin-bottom:10px;}
   .cart-item{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid #F3F4F6;transition:background .2s;}
-  .cart-item--free{background:linear-gradient(90deg,rgba(5,150,105,.05),transparent);border-left:3px solid #059669;padding-left:9px;}
+
   .cart-item__icon{font-size:1.8rem;flex-shrink:0;width:42px;height:42px;background:var(--gray-light);border-radius:8px;display:flex;align-items:center;justify-content:center;}
   .cart-item__info{flex:1;}
   .cart-item__title{font-family:'Nunito',sans-serif;font-weight:700;font-size:.88rem;color:var(--navy);line-height:1.3;}
   .cart-item__cat{font-size:.75rem;color:var(--text-muted);margin-top:2px;display:flex;align-items:center;gap:6px;}
-  .free-badge{display:inline-flex;align-items:center;gap:3px;background:#059669;color:#fff;font-family:'Nunito',sans-serif;font-weight:800;font-size:.68rem;padding:2px 7px;border-radius:100px;letter-spacing:.03em;}
   .cart-item__controls{display:flex;align-items:center;gap:8px;margin-top:8px;}
   .cart-item__price{font-family:'Nunito',sans-serif;font-weight:800;font-size:.95rem;color:var(--amber-dark);white-space:nowrap;text-align:right;}
-  .cart-item__price--free{display:flex;flex-direction:column;align-items:flex-end;gap:1px;}
-  .cart-item__price--free .orig{font-size:.75rem;color:var(--text-muted);text-decoration:line-through;}
-  .cart-item__price--free .now{color:#059669;}
   .cart-item__remove{background:none;border:none;color:var(--gray-mid);font-size:.85rem;padding:2px 4px;transition:var(--tr);}
   .cart-item__remove:hover{color:#EF4444;}
   .cart-foot{border-top:1px solid #E5E7EB;padding:18px 22px;}
-  .cart-promo{background:#FFF8E7;border:1px solid rgba(245,158,11,.35);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:14px;font-size:.84rem;color:var(--navy);}
-  .cart-promo strong{color:var(--amber-dark);}
   .cart-summary{display:flex;flex-direction:column;gap:7px;margin-bottom:16px;}
   .cart-row{display:flex;justify-content:space-between;font-size:.88rem;}
   .cart-row--total{font-family:'Nunito',sans-serif;font-weight:900;font-size:1.1rem;color:var(--navy);border-top:1px solid #E5E7EB;padding-top:7px;margin-top:2px;}
@@ -282,39 +276,15 @@
     .shop-hero h1{font-size:1.6rem;}
   }
 
-  /* ── Free claim popup ── */
-  .free-popup-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1100;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .25s;}
-  .free-popup-overlay.open{opacity:1;pointer-events:all;}
-  .free-popup{background:#fff;border-radius:20px;padding:36px 28px 28px;max-width:400px;width:100%;text-align:center;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.25);transform:scale(.92);transition:transform .25s;}
-  .free-popup-overlay.open .free-popup{transform:scale(1);}
-  .free-popup__close{position:absolute;top:14px;right:16px;background:none;border:none;font-size:1.2rem;color:#9CA3AF;cursor:pointer;line-height:1;padding:4px;}
-  .free-popup__close:hover{color:#374151;}
-  .free-popup__burst{font-size:3.2rem;line-height:1;margin-bottom:10px;animation:pop .4s ease .1s both;}
-  @keyframes pop{0%{transform:scale(0) rotate(-15deg)}70%{transform:scale(1.15) rotate(3deg)}100%{transform:scale(1) rotate(0)}}
-  .free-popup__title{font-family:'Nunito',sans-serif;font-weight:900;font-size:1.45rem;color:var(--navy);margin-bottom:6px;}
-  .free-popup__title span{color:#059669;}
-  .free-popup__sub{font-size:.87rem;color:var(--text-muted);margin-bottom:20px;}
-  .free-popup__item{background:linear-gradient(135deg,#ecfdf5,#d1fae5);border:2px solid #6ee7b7;border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:14px;text-align:left;margin-bottom:20px;}
-  .free-popup__item-icon{font-size:2rem;background:#fff;border-radius:10px;width:48px;height:48px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-  .free-popup__item-info{flex:1;min-width:0;}
-  .free-popup__item-title{font-family:'Nunito',sans-serif;font-weight:700;font-size:.88rem;color:var(--navy);line-height:1.3;word-break:break-word;}
-  .free-popup__item-price{font-size:.82rem;color:var(--text-muted);margin-top:4px;}
-  .free-popup__claim{width:100%;padding:14px;background:linear-gradient(135deg,#059669,#047857);color:#fff;border:none;border-radius:10px;font-family:'Nunito',sans-serif;font-weight:900;font-size:1rem;cursor:pointer;box-shadow:0 4px 14px rgba(5,150,105,.35);transition:all .2s;margin-bottom:10px;}
-  .free-popup__claim:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(5,150,105,.45);}
-  .free-popup__later{background:none;border:none;font-size:.84rem;color:var(--text-muted);cursor:pointer;padding:4px;}
-  .free-popup__later:hover{color:var(--navy);}
-  /* Promo bar claim button */
-  .claim-btn{background:#059669;color:#fff;border:none;border-radius:6px;font-family:'Nunito',sans-serif;font-weight:700;font-size:.78rem;padding:4px 10px;cursor:pointer;margin-left:8px;transition:background .2s;}
-  .claim-btn:hover{background:#047857;}
   </style>
 </head>
 <body>
 
-<!-- ── Promo banner ── -->
+<!-- ── Info banner ── -->
 <div class="promo-banner">
-  🎉 <span>Beli 2 Percuma 1</span> (Video & E-Book) &nbsp;|&nbsp;
   📦 Penghantaran Google Drive dalam <span>24 jam</span> &nbsp;|&nbsp;
-  🔒 Pembayaran selamat
+  🔒 Pembayaran selamat &nbsp;|&nbsp;
+  ♟ Lebih 3,900 produk catur digital
 </div>
 
 <!-- ── Navbar ── -->
@@ -391,10 +361,7 @@
   </div>
   <div class="cart-items" id="cartItemsList"></div>
   <div class="cart-foot" id="cartFoot" style="display:none;">
-    <div class="cart-promo" id="cartPromoMsg"></div>
     <div class="cart-summary">
-      <div class="cart-row"><span>Subtotal</span><span id="cartSubtotal">RM 0</span></div>
-      <div class="cart-row" id="freeRow" style="display:none;color:#059669;"><span>♟ Percuma (Beli 2 Percuma 1)</span><span id="freeAmt">- RM 0</span></div>
       <div class="cart-row cart-row--total"><span>JUMLAH</span><span id="cartTotal">RM 0</span></div>
     </div>
     <button class="checkout-btn" id="checkoutBtn">💳 Teruskan ke Bayaran</button>
@@ -479,25 +446,6 @@
   </div>
 </div>
 
-<!-- ── Free item claim popup ── -->
-<div class="free-popup-overlay" id="freePopupOverlay">
-  <div class="free-popup" id="freePopup">
-    <button class="free-popup__close" id="freePopupClose">✕</button>
-    <div class="free-popup__burst">🎉</div>
-    <h2 class="free-popup__title">Anda Layak 1 Item <span>PERCUMA!</span></h2>
-    <p class="free-popup__sub">Beli 2 Video/E-Book — item paling murah anda percuma!</p>
-    <div class="free-popup__item" id="freePopupItem">
-      <div class="free-popup__item-icon" id="freePopupIcon">♟</div>
-      <div class="free-popup__item-info">
-        <div class="free-popup__item-title" id="freePopupTitle">—</div>
-        <div class="free-popup__item-price"><span id="freePopupPrice">RM 0</span> → <strong style="color:#059669;">PERCUMA</strong></div>
-      </div>
-    </div>
-    <button class="free-popup__claim" id="freePopupClaim">🎁 Tuntut Percuma Sekarang!</button>
-    <button class="free-popup__later" id="freePopupLater">Tuntut kemudian</button>
-  </div>
-</div>
-
 <!-- ── Admin image modal ── -->
 <div class="admin-modal-overlay" id="adminModalOverlay">
   <div class="admin-modal">
@@ -547,53 +495,16 @@ let ALL_PRODUCTS = [];
 let filtered     = [];
 let activeCat    = 'all';
 let searchQ      = '';
-let cart         = JSON.parse(localStorage.getItem('cfk_cart') || '[]');
-let claimedFreeIds = new Set(JSON.parse(localStorage.getItem('cfk_claims') || '[]'));
+let cart = JSON.parse(localStorage.getItem('cfk_cart') || '[]');
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function stars(r){ const full=Math.round(r); return '★'.repeat(full)+'☆'.repeat(5-full); }
 function saveCart(){ localStorage.setItem('cfk_cart', JSON.stringify(cart)); }
-function saveClaims(){ localStorage.setItem('cfk_claims', JSON.stringify([...claimedFreeIds])); }
-
-// Pastikan claims masih valid (item masih dalam troli & bilangan tak melebihi had)
-function reconcileClaims(){
-  // Buang claim untuk item dah takda dalam troli
-  claimedFreeIds.forEach(id=>{ if(!cart.find(c=>c.id===id)) claimedFreeIds.delete(id); });
-  // Buang claim berlebihan jika bilangan eligible berkurang
-  const eligible = cart.filter(c=>c.category==='video'||c.category==='ebook');
-  const maxFree  = Math.floor(eligible.length/2);
-  if(claimedFreeIds.size > maxFree){
-    // Keluarkan item paling mahal dari claims dulu
-    const claimed = [...claimedFreeIds].map(id=>cart.find(c=>c.id===id)).filter(Boolean);
-    claimed.sort((a,b)=>b.price-a.price);
-    while(claimedFreeIds.size > maxFree){ claimedFreeIds.delete(claimed.shift().id); }
-  }
-  saveClaims();
-}
 function inCart(id){ return cart.some(c=>c.id===id); }
 function cartTotal(){
-  reconcileClaims();
-  const eligible     = cart.filter(c=>c.category==='video'||c.category==='ebook');
-  const eligibleCount= eligible.length;
-  const maxFree      = Math.floor(eligibleCount/2);
-  const unclaimedCount = maxFree - claimedFreeIds.size; // entitlement yang belum dituntut
-
-  // nilai diskaun = harga item-item yang sudah dituntut percuma
-  const freeValue = [...claimedFreeIds]
-    .map(id=>cart.find(c=>c.id===id)).filter(Boolean)
-    .reduce((s,c)=>s+c.price,0);
-
-  const subtotal = cart.reduce((s,c)=>s+c.price,0);
-  const neededNext = eligibleCount%2===0 ? 2 : 1;
-
-  // item paling murah yang layak & belum dituntut (untuk popup)
-  const claimableItem = eligible
-    .filter(c=>!claimedFreeIds.has(c.id))
-    .sort((a,b)=>a.price-b.price)[0] || null;
-
-  return { subtotal, freeValue, total:subtotal-freeValue, freeIds:claimedFreeIds,
-           eligibleCount, maxFree, unclaimedCount, neededNext, claimableItem };
+  const total = cart.reduce((s,c)=>s+c.price,0);
+  return { total };
 }
 function totalItems(){ return cart.reduce((s,c)=>s+c.qty,0); }
 
@@ -652,17 +563,11 @@ function renderProducts(){
       if(inCart(id)){
         openCart();
       } else {
-        const prevElig = cart.filter(c=>c.category==='video'||c.category==='ebook').length;
         cart.push({...prod, qty:1});
         saveCart();
         updateCartUI();
         btn.className='add-btn add-btn--in';
         btn.textContent='✓ Dalam Troli';
-        // Popup jika tambah item ke-2, ke-4, ke-6... (eligible)
-        const newElig = cart.filter(c=>c.category==='video'||c.category==='ebook').length;
-        if((prod.category==='video'||prod.category==='ebook') && newElig%2===0 && newElig>prevElig){
-          setTimeout(showFreePopup, 350);
-        }
       }
     });
   });
@@ -745,33 +650,18 @@ function updateCartUI(){
   }
   foot.style.display='block';
 
-  // Kira semua nilai sekali sahaja
-  const {subtotal,freeValue,total,freeIds,eligibleCount,maxFree,unclaimedCount,neededNext,claimableItem} = cartTotal();
-
-  list.innerHTML = cart.map(item=>{
-    const isFree = freeIds && freeIds.has(item.id);
-    const priceHtml = isFree
-      ? `<div class="cart-item__price cart-item__price--free">
-           <span class="orig">RM ${item.price.toFixed(2)}</span>
-           <span class="now">PERCUMA</span>
-         </div>`
-      : `<div class="cart-item__price">RM ${item.price.toFixed(2)}</div>`;
-    return `
-    <div class="cart-item${isFree?' cart-item--free':''}" data-id="${item.id}">
+  list.innerHTML = cart.map(item=>`
+    <div class="cart-item" data-id="${item.id}">
       <div class="cart-item__icon">${item.icon}</div>
       <div class="cart-item__info">
         <div class="cart-item__title">${esc(item.title)}</div>
-        <div class="cart-item__cat">
-          ${CAT_LABEL[item.category]||item.category}
-          ${isFree?'<span class="free-badge">🎁 PERCUMA</span>':''}
-        </div>
+        <div class="cart-item__cat">${CAT_LABEL[item.category]||item.category}</div>
         <div class="cart-item__controls">
           <button class="cart-item__remove" data-id="${item.id}">🗑 Buang</button>
         </div>
       </div>
-      ${priceHtml}
-    </div>`;
-  }).join('');
+      <div class="cart-item__price">RM ${item.price.toFixed(2)}</div>
+    </div>`).join('');
 
   list.querySelectorAll('.cart-item__remove').forEach(btn=>{
     btn.addEventListener('click',()=>{
@@ -782,28 +672,8 @@ function updateCartUI(){
       if(gridBtn){ gridBtn.className='add-btn add-btn--add'; gridBtn.textContent='+ Tambah ke Troli'; }
     });
   });
-  const promoMsg = document.getElementById('cartPromoMsg');
-  const freeRow  = document.getElementById('freeRow');
-
-  if(unclaimedCount > 0 && claimableItem){
-    // Ada entitlement yang belum dituntut
-    promoMsg.innerHTML = `🎁 <strong>${unclaimedCount} percuma menunggu!</strong> Tuntut item percuma anda.
-      <button class="claim-btn" id="cartClaimBtn">Tuntut Sekarang</button>`;
-    document.getElementById('cartClaimBtn')?.addEventListener('click',()=>{ closeCart(); showFreePopup(); });
-  } else if(claimedFreeIds.size > 0){
-    promoMsg.innerHTML = `<strong>🎉 ${claimedFreeIds.size} item percuma digunakan!</strong> Tambah <strong>${neededNext} lagi</strong> Video/E-Book untuk percuma seterusnya.`;
-  } else {
-    promoMsg.innerHTML = `🎁 Tambah <strong>${neededNext} lagi</strong> Video/E-Book — dapat <strong>1 percuma</strong>!`;
-  }
-
-  if(claimedFreeIds.size > 0){
-    freeRow.style.display='flex';
-    document.getElementById('freeAmt').textContent=`- RM ${freeValue.toFixed(2)}`;
-  } else {
-    freeRow.style.display='none';
-  }
-  document.getElementById('cartSubtotal').textContent=`RM ${subtotal}`;
-  document.getElementById('cartTotal').textContent=`RM ${total}`;
+  const {total} = cartTotal();
+  document.getElementById('cartTotal').textContent=`RM ${total.toFixed(2)}`;
 }
 
 // ── Open / close cart ─────────────────────────────────────────────────────────
@@ -820,15 +690,11 @@ function closeCart(){
 
 // ── Open / close modal ────────────────────────────────────────────────────────
 function openModal(){
-  const {subtotal,freeValue,total,freeIds} = cartTotal();
-  // Populate order summary
-  document.getElementById('modalOrderItems').innerHTML = cart.map(c=>{
-    const isFree = freeIds && freeIds.has(c.id);
-    return isFree
-      ? `<div class="order-item" style="color:#059669;"><span class="order-item__title">🎁 ${esc(c.title)}</span><span>PERCUMA</span></div>`
-      : `<div class="order-item"><span class="order-item__title">${esc(c.title)}</span><span>RM ${c.price.toFixed(2)}</span></div>`;
-  }).join('') + (freeValue ? `<div class="order-item" style="color:#059669;font-weight:700;border-top:1px solid #6ee7b7;padding-top:6px;margin-top:4px;"><span>Diskaun Beli 2 Percuma 1</span><span>- RM ${freeValue.toFixed(2)}</span></div>` : '');
-  document.getElementById('modalTotal').textContent=`RM ${total}`;
+  const {total} = cartTotal();
+  document.getElementById('modalOrderItems').innerHTML = cart.map(c=>
+    `<div class="order-item"><span class="order-item__title">${esc(c.title)}</span><span>RM ${c.price.toFixed(2)}</span></div>`
+  ).join('');
+  document.getElementById('modalTotal').textContent=`RM ${total.toFixed(2)}`;
   document.getElementById('orderFormSection').style.display='block';
   document.getElementById('orderSuccess').style.display='none';
   document.getElementById('modalOverlay').classList.add('open');
@@ -843,13 +709,6 @@ function closeModal(){
 var ADMIN_WHATSAPP = '60195727276'; // nombor WhatsApp admin
 
 function buildWhatsAppMsg(orderId, name, phone, email, items, total){
-  // kira item percuma untuk WhatsApp message
-  var eligible = items.filter(function(c){ return c.category==='video'||c.category==='ebook'; });
-  var freeCount = Math.floor(eligible.length/2);
-  var sorted = eligible.slice().sort(function(a,b){ return a.price-b.price; });
-  var freeIdSet = {};
-  sorted.slice(0,freeCount).forEach(function(c){ freeIdSet[c.id]=true; });
-
   var lines = [];
   lines.push('🛒 *PESANAN BARU — CFK Kedai Digital*');
   lines.push('━━━━━━━━━━━━━━━━━━━━');
@@ -862,9 +721,7 @@ function buildWhatsAppMsg(orderId, name, phone, email, items, total){
   lines.push('');
   lines.push('*🛍 Item Pesanan*');
   items.forEach(function(item){
-    var isFree = freeIdSet[item.id];
-    var label = isFree ? ' 🎁 *PERCUMA*' : ' = RM ' + parseFloat(item.price).toFixed(2);
-    lines.push('• ' + item.title + label);
+    lines.push('• ' + item.title + ' = RM ' + parseFloat(item.price).toFixed(2));
   });
   lines.push('');
   lines.push('*💰 JUMLAH: RM ' + parseFloat(total).toFixed(2) + '*');
@@ -1158,39 +1015,6 @@ async function adminSaveImage(title, url) {
 
 }());
 
-// ── Free claim popup ──────────────────────────────────────────────────────────
-function showFreePopup(){
-  const {claimableItem} = cartTotal();
-  if(!claimableItem) return; // tiada item untuk dituntut
-  // Isi maklumat popup
-  document.getElementById('freePopupIcon').textContent  = claimableItem.icon || '♟';
-  document.getElementById('freePopupTitle').textContent = claimableItem.title;
-  document.getElementById('freePopupPrice').textContent = `RM ${claimableItem.price.toFixed(2)}`;
-  document.getElementById('freePopupOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeFreePopup(){
-  document.getElementById('freePopupOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-document.getElementById('freePopupClaim').addEventListener('click', ()=>{
-  const {claimableItem} = cartTotal();
-  if(claimableItem){
-    claimedFreeIds.add(claimableItem.id);
-    saveClaims();
-    updateCartUI();
-  }
-  closeFreePopup();
-  openCart(); // buka troli supaya cust nampak item percuma
-});
-
-document.getElementById('freePopupLater').addEventListener('click', closeFreePopup);
-document.getElementById('freePopupClose').addEventListener('click', closeFreePopup);
-document.getElementById('freePopupOverlay').addEventListener('click', e=>{
-  if(e.target===e.currentTarget) closeFreePopup();
-});
 </script>
 </body>
 </html>
